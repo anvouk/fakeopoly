@@ -7,6 +7,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameService } from './shared';
 import { PlayerService } from './shared';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,8 +27,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HomeModule,
     NgbModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    AkitaNgRouterStoreModule,
   ],
-  providers: [GameService, PlayerService],
+  providers: [GameService, PlayerService, { provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
-  templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.css']
+  templateUrl: './invalid.component.html',
+  styleUrls: ['./invalid.component.css']
 })
-export class NotFoundComponent implements OnInit {
+export class InvalidComponent implements OnInit {
   invalidGameId?: string;
+  reason?: string;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -16,6 +17,7 @@ export class NotFoundComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.invalidGameId = params['game'];
+      this.reason = params['reason'];
     })
   }
 }
