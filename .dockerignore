@@ -1,8 +1,9 @@
+.git
+
 .idea
 .vscode
 .env*
 .angular
-src.bak
 
 .DS_Store
 .AppleDouble

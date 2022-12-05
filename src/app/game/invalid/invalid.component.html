@@ -1,7 +1,0 @@
-<div>
-  <div [ngSwitch]="reason">
-    <p *ngSwitchCase="'notFound'">GAME NOT FOUND {{ invalidGameId }}</p>
-    <p *ngSwitchCase="'forbidden'">THIS GAME IS PRIVATE {{ invalidGameId }}</p>
-    <p *ngSwitchDefault>UNKNOWN ERROR {{ invalidGameId }}</p>
-  </div>
-</div>
