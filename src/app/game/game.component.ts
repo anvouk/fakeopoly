@@ -71,21 +71,21 @@ export class GameComponent implements OnInit {
     });
 
     try {
-      if (await this.tryEnterExistingGame()) {
-        return;
-      }
-    } catch (err) {
-      this.log.error(`failed re-enter existing game: ${err}`);
-      await this.router.navigate(['home']);
-      return;
-    }
-
-    try {
       if (await this.tryCreateNewGame()) {
         return;
       }
     } catch (err) {
       this.log.error(`failed creating new game: ${err}`);
+      await this.router.navigate(['home']);
+      return;
+    }
+
+    try {
+      if (await this.tryEnterExistingGame()) {
+        return;
+      }
+    } catch (err) {
+      this.log.error(`failed re-enter existing game: ${err}`);
       await this.router.navigate(['home']);
       return;
     }

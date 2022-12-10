@@ -23,7 +23,7 @@ export class PouchserverService {
         }
       ],
     };
-    this.log.debug(`new game: ${game._id}`);
+    this.log.debug(`new game: ${JSON.stringify(game)}`);
     await this.dbGames.put(game);
     return game;
   }

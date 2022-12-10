@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 import logger from '../utils/logger';
 import { MatButtonModule } from '@angular/material/button';
 import { PlayerService } from '../services/player.service';
-import { GameService } from '../services/game.service';
+import { GameCreationOptions, GameService } from '../services/game.service';
 import { Router } from '@angular/router';
+import { CreateModalComponent } from './create-modal/create-modal.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    CreateModalComponent,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -20,13 +27,29 @@ export class HomeComponent {
     private readonly router: Router,
     private readonly gameService: GameService,
     private readonly playerService: PlayerService,
+    private readonly dialog: MatDialog
   ) {}
 
-  async createNewGame() {
-    this.log.debug('createNewGame');
-    const game = await this.gameService.createNewGame({
-      name: 'test-game',
+  async beginNewGameCreation() {
+    this.log.debug('beginNewGameCreation');
+    this.openCreateNewGameDialog();
+  }
+
+  openCreateNewGameDialog() {
+    const dialogRef = this.dialog.open(CreateModalComponent, {
+      data: {},
     });
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result != null) {
+        await this.createNewGame(result);
+      }
+    });
+  }
+
+  async createNewGame(gameOpts: GameCreationOptions) {
+    this.log.debug(`creating new game with options: ${JSON.stringify(gameOpts)}`);
+    const game = await this.gameService.createNewGame(gameOpts);
     await this.router.navigate(['game'], {
       state: {
         game: game,
