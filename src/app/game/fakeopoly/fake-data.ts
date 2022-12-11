@@ -102,3 +102,32 @@ export const fakeTiles: TileInfo[] = [
     }
   },
 ];
+
+export interface CornerTileInfo {
+  id: 'botLeft' | 'topLeft' | 'topRight' | 'botRight',
+  name: string,
+  imageUrl: string,
+}
+
+export const fakeCornerTiles: CornerTileInfo[] = [
+  {
+    id: 'botLeft',
+    name: 'START',
+    imageUrl: 'http://localhost:4200/assets/corner.png',
+  },
+  {
+    id: 'topLeft',
+    name: 'PRISON',
+    imageUrl: 'http://localhost:4200/assets/corner.png',
+  },
+  {
+    id: 'topRight',
+    name: 'PARKING',
+    imageUrl: 'http://localhost:4200/assets/corner.png',
+  },
+  {
+    id: 'botRight',
+    name: 'GO TO PRISON',
+    imageUrl: 'http://localhost:4200/assets/corner.png',
+  },
+]

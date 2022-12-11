@@ -6,7 +6,7 @@ import { Player } from '../services/player.service';
 import { Game, GameService } from '../services/game.service';
 import Konva from 'konva';
 import { FakeTile } from './fakeopoly/fake-tile';
-import { fakeTiles } from './fakeopoly/fake-data';
+import { fakeCornerTiles, fakeTiles } from './fakeopoly/fake-data';
 import { CornerTile } from './fakeopoly/corner-Tile';
 
 @Component({
@@ -83,7 +83,12 @@ export class GameComponent implements OnInit {
 
     this.log.debug('begin map draw');
 
-    const CornerBottomLeft = new CornerTile(0, GameComponent.HEIGHT - CornerTile.HEIGHT);
+    const CornerBottomLeft = new CornerTile(
+      0,
+      GameComponent.HEIGHT - CornerTile.HEIGHT,
+      0,
+      fakeCornerTiles[0]
+    );
     layer.add(CornerBottomLeft.root);
 
     let batch = 1;
@@ -99,7 +104,12 @@ export class GameComponent implements OnInit {
       layer.add(tile.root);
     }
 
-    const cornerLeft = new CornerTile(0, 0);
+    const cornerLeft = new CornerTile(
+      CornerTile.HEIGHT,
+      0,
+      90,
+      fakeCornerTiles[1],
+    );
     layer.add(cornerLeft.root);
 
     // UP
@@ -113,7 +123,12 @@ export class GameComponent implements OnInit {
       layer.add(tile.root);
     }
 
-    const cornerRight = new CornerTile(GameComponent.HEIGHT - CornerTile.WIDTH, 0);
+    const cornerRight = new CornerTile(
+      GameComponent.HEIGHT,
+      CornerTile.WIDTH,
+      180,
+      fakeCornerTiles[2],
+    );
     layer.add(cornerRight.root);
 
     // RIGHT
@@ -127,7 +142,12 @@ export class GameComponent implements OnInit {
       layer.add(tile.root);
     }
 
-    const cornerBottomRight = new CornerTile(GameComponent.HEIGHT - CornerTile.WIDTH, GameComponent.WIDTH - CornerTile.WIDTH);
+    const cornerBottomRight = new CornerTile(
+      GameComponent.HEIGHT - CornerTile.WIDTH,
+      GameComponent.WIDTH,
+      270,
+      fakeCornerTiles[3],
+      );
     layer.add(cornerBottomRight.root);
 
     // BOTTOM
