@@ -15,7 +15,7 @@ import ContextMenuManager from './fakeopoly/context-menu-manager';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
   private readonly log = logger('game');
@@ -43,7 +43,7 @@ export class GameComponent implements OnInit {
       }
       const meInGame = localStorage.getItem('playerId');
       this.currentGame = game;
-      this.currentPlayer = this.currentGame.players.find(p => p.nickname === meInGame);
+      this.currentPlayer = this.currentGame.players.find((p) => p.nickname === meInGame);
       if (this.currentPlayer == undefined) {
         throw new Error('your player does not exist inside game');
       }
@@ -78,7 +78,7 @@ export class GameComponent implements OnInit {
     // context menu, which is annoying.
     stage.on('contextmenu', (e) => {
       e.evt.preventDefault();
-    })
+    });
 
     const layer = new Konva.Layer();
 
@@ -91,12 +91,7 @@ export class GameComponent implements OnInit {
 
     this.log.debug('begin map draw');
 
-    const CornerBottomLeft = new CornerTile(
-      0,
-      GameComponent.HEIGHT - CornerTile.HEIGHT,
-      0,
-      fakeCornerTiles[0]
-    );
+    const CornerBottomLeft = new CornerTile(0, GameComponent.HEIGHT - CornerTile.HEIGHT, 0, fakeCornerTiles[0]);
     layer.add(CornerBottomLeft.root);
 
     let batch = 1;
@@ -105,47 +100,37 @@ export class GameComponent implements OnInit {
     for (let i = batch - 1; i < batch * 9; ++i) {
       const tile = new FakeTile(
         FakeTile.HEIGHT,
-        GameComponent.HEIGHT - CornerTile.HEIGHT - FakeTile.WIDTH - (i * FakeTile.WIDTH),
+        GameComponent.HEIGHT - CornerTile.HEIGHT - FakeTile.WIDTH - i * FakeTile.WIDTH,
         90,
-        fakeTiles[i]
+        fakeTiles[i],
       );
       layer.add(tile.root);
     }
 
-    const cornerLeft = new CornerTile(
-      CornerTile.HEIGHT,
-      0,
-      90,
-      fakeCornerTiles[1],
-    );
+    const cornerLeft = new CornerTile(CornerTile.HEIGHT, 0, 90, fakeCornerTiles[1]);
     layer.add(cornerLeft.root);
 
     // UP
     for (let i = batch - 1; i < batch * 9; ++i) {
       const tile = new FakeTile(
-        CornerTile.WIDTH + FakeTile.WIDTH + (i * FakeTile.WIDTH),
+        CornerTile.WIDTH + FakeTile.WIDTH + i * FakeTile.WIDTH,
         FakeTile.HEIGHT,
         180,
-        fakeTiles[i]
+        fakeTiles[i],
       );
       layer.add(tile.root);
     }
 
-    const cornerRight = new CornerTile(
-      GameComponent.HEIGHT,
-      CornerTile.WIDTH,
-      180,
-      fakeCornerTiles[2],
-    );
+    const cornerRight = new CornerTile(GameComponent.HEIGHT, CornerTile.WIDTH, 180, fakeCornerTiles[2]);
     layer.add(cornerRight.root);
 
     // RIGHT
     for (let i = batch - 1; i < batch * 9; ++i) {
       const tile = new FakeTile(
         GameComponent.WIDTH - FakeTile.HEIGHT,
-        CornerTile.HEIGHT + FakeTile.WIDTH + (i * FakeTile.WIDTH),
+        CornerTile.HEIGHT + FakeTile.WIDTH + i * FakeTile.WIDTH,
         270,
-        fakeTiles[i]
+        fakeTiles[i],
       );
       layer.add(tile.root);
     }
@@ -161,10 +146,10 @@ export class GameComponent implements OnInit {
     // BOTTOM
     for (let i = batch - 1; i < batch * 9; ++i) {
       const tile = new FakeTile(
-        GameComponent.WIDTH - CornerTile.WIDTH - FakeTile.WIDTH - (i * FakeTile.WIDTH),
+        GameComponent.WIDTH - CornerTile.WIDTH - FakeTile.WIDTH - i * FakeTile.WIDTH,
         GameComponent.HEIGHT - FakeTile.HEIGHT,
         0,
-        fakeTiles[i]
+        fakeTiles[i],
       );
       layer.add(tile.root);
     }
@@ -181,7 +166,7 @@ export class GameComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     // TODO: handle join existing game
-    this.route.queryParams.subscribe(async params => {
+    this.route.queryParams.subscribe(async (params) => {
       const joinGameId = params['id'];
       if (joinGameId != null) {
         this.log.debug(`joinGameId: ${joinGameId}`);

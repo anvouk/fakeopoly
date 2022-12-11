@@ -29,13 +29,13 @@ export class FakeTile {
 
     const text = new Konva.Text({
       text: tileInfo.name.replaceAll(' ', '\n'),
-      x: (FakeTile.WIDTH / 2) - (FakeTile.WIDTH / 3),
-      y: (FakeTile.HEIGHT / 3),
+      x: FakeTile.WIDTH / 2 - FakeTile.WIDTH / 3,
+      y: FakeTile.HEIGHT / 3,
       fontSize: 16,
       fontFamily: 'Calibri',
       align: 'center',
       fill: '#000000',
-    })
+    });
     this._root.add(text);
   }
 
@@ -44,7 +44,7 @@ export class FakeTile {
     img.src = tileInfo.specialData.imageUrl;
 
     const backgroundImage = new Konva.Image({
-      x: (FakeTile.WIDTH / 2) - (FakeTile.WIDTH / 3),
+      x: FakeTile.WIDTH / 2 - FakeTile.WIDTH / 3,
       y: FakeTile.HEIGHT - tileInfo.specialData.height - 20,
       width: tileInfo.specialData.width,
       height: tileInfo.specialData.height,
@@ -54,13 +54,13 @@ export class FakeTile {
 
     const text = new Konva.Text({
       text: tileInfo.name.replaceAll(' ', '\n'),
-      x: (FakeTile.WIDTH / 2) - (FakeTile.WIDTH / 3),
+      x: FakeTile.WIDTH / 2 - FakeTile.WIDTH / 3,
       y: 20,
       fontSize: 16,
       fontFamily: 'Calibri',
       align: 'center',
       fill: '#000000',
-    })
+    });
     this._root.add(text);
   }
 
@@ -77,7 +77,7 @@ export class FakeTile {
     this._root.on('contextmenu', (e) => {
       e.evt.preventDefault();
       ContextMenuManager.showPopup(this);
-    })
+    });
 
     const background = new Konva.Rect({
       width: FakeTile.WIDTH,
@@ -92,7 +92,7 @@ export class FakeTile {
         this.constructRegularTile(tileInfo);
         break;
       case 'special':
-        this.constructSpecialTile(tileInfo)
+        this.constructSpecialTile(tileInfo);
         break;
     }
   }

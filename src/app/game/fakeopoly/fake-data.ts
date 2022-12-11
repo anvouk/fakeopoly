@@ -1,23 +1,23 @@
 export interface BaseTileInfo {
-  id: number,
-  name: string,
+  id: number;
+  name: string;
 }
 
 export interface TileRegularInfo extends BaseTileInfo {
-  type: 'regular',
+  type: 'regular';
   regularData: {
     // color also indicates the group
-    color: string,
-  }
+    color: string;
+  };
 }
 
 export interface TileSpecialInfo extends BaseTileInfo {
-  type: 'special',
+  type: 'special';
   specialData: {
-    imageUrl: string
-    width: number,
-    height: number,
-  }
+    imageUrl: string;
+    width: number;
+    height: number;
+  };
 }
 
 export type TileInfo = TileRegularInfo | TileSpecialInfo;
@@ -29,7 +29,7 @@ export const fakeTiles: TileInfo[] = [
     type: 'regular',
     regularData: {
       color: '#b700ac',
-    }
+    },
   },
   {
     id: 1,
@@ -37,7 +37,7 @@ export const fakeTiles: TileInfo[] = [
     type: 'regular',
     regularData: {
       color: '#b700ac',
-    }
+    },
   },
   {
     id: 2,
@@ -47,7 +47,7 @@ export const fakeTiles: TileInfo[] = [
       imageUrl: 'http://localhost:4200/assets/test.png',
       width: 64,
       height: 64,
-    }
+    },
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ export const fakeTiles: TileInfo[] = [
     type: 'regular',
     regularData: {
       color: '#e5791e',
-    }
+    },
   },
   {
     id: 4,
@@ -63,7 +63,7 @@ export const fakeTiles: TileInfo[] = [
     type: 'regular',
     regularData: {
       color: '#b700ac',
-    }
+    },
   },
   {
     id: 5,
@@ -73,7 +73,7 @@ export const fakeTiles: TileInfo[] = [
       imageUrl: 'http://localhost:4200/assets/test.png',
       width: 64,
       height: 64,
-    }
+    },
   },
   {
     id: 6,
@@ -83,7 +83,7 @@ export const fakeTiles: TileInfo[] = [
       imageUrl: 'http://localhost:4200/assets/test.png',
       width: 64,
       height: 64,
-    }
+    },
   },
   {
     id: 7,
@@ -91,7 +91,7 @@ export const fakeTiles: TileInfo[] = [
     type: 'regular',
     regularData: {
       color: '#e5791e',
-    }
+    },
   },
   {
     id: 8,
@@ -99,14 +99,14 @@ export const fakeTiles: TileInfo[] = [
     type: 'regular',
     regularData: {
       color: '#e5791e',
-    }
+    },
   },
 ];
 
 export interface CornerTileInfo {
-  id: 'botLeft' | 'topLeft' | 'topRight' | 'botRight',
-  name: string,
-  imageUrl: string,
+  id: 'botLeft' | 'topLeft' | 'topRight' | 'botRight';
+  name: string;
+  imageUrl: string;
 }
 
 export const fakeCornerTiles: CornerTileInfo[] = [
@@ -130,4 +130,4 @@ export const fakeCornerTiles: CornerTileInfo[] = [
     name: 'GO TO PRISON',
     imageUrl: 'http://localhost:4200/assets/corner.png',
   },
-]
+];
