@@ -5,3 +5,25 @@
   border: 1px solid purple;
   padding: 1em;
 }
+
+// Popup style for context menus
+#context-menu {
+  display: none;
+  position: absolute;
+  width: 60px;
+  background-color: white;
+  box-shadow: 0 0 5px grey;
+  border-radius: 3px;
+
+  button {
+    width: 100%;
+    background-color: white;
+    border: none;
+    margin: 0;
+    padding: 10px;
+  }
+
+  button:hover {
+    background-color: lightgray;
+  }
+}

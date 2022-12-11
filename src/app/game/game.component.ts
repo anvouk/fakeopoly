@@ -8,6 +8,7 @@ import Konva from 'konva';
 import { FakeTile } from './fakeopoly/fake-tile';
 import { fakeCornerTiles, fakeTiles } from './fakeopoly/fake-data';
 import { CornerTile } from './fakeopoly/corner-Tile';
+import ContextMenuManager from './fakeopoly/context-menu-manager';
 
 @Component({
   selector: 'app-game',
@@ -71,6 +72,13 @@ export class GameComponent implements OnInit {
       width: GameComponent.WIDTH,
       height: GameComponent.HEIGHT,
     });
+    ContextMenuManager.setup(stage);
+
+    // register empty right click event simply to prevent default
+    // context menu, which is annoying.
+    stage.on('contextmenu', (e) => {
+      e.evt.preventDefault();
+    })
 
     const layer = new Konva.Layer();
 

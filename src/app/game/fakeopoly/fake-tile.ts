@@ -1,5 +1,6 @@
 import Konva from 'konva';
 import { TileInfo, TileRegularInfo, TileSpecialInfo } from './fake-data';
+import ContextMenuManager from './context-menu-manager';
 
 export class FakeTile {
   public static readonly WIDTH: number = 100;
@@ -8,8 +9,12 @@ export class FakeTile {
   private readonly _root: Konva.Group;
   private readonly _tileInfo: TileInfo;
 
-  get root(): Konva.Group {
+  public get root(): Konva.Group {
     return this._root;
+  }
+
+  public get tileInfo(): TileInfo {
+    return this._tileInfo;
   }
 
   private constructRegularTile(tileInfo: TileRegularInfo) {
@@ -68,6 +73,11 @@ export class FakeTile {
       width: FakeTile.WIDTH,
       height: FakeTile.HEIGHT,
     });
+
+    this._root.on('contextmenu', (e) => {
+      e.evt.preventDefault();
+      ContextMenuManager.showPopup(this);
+    })
 
     const background = new Konva.Rect({
       width: FakeTile.WIDTH,

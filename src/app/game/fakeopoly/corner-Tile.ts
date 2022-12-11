@@ -7,7 +7,7 @@ export class CornerTile {
 
   private readonly _root: Konva.Group;
 
-  get root(): Konva.Group {
+  public get root(): Konva.Group {
     return this._root;
   }
 
