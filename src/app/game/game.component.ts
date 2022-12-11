@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import logger from '../utils/logger';
 import { Player } from '../services/player.service';
 import { Game, GameService } from '../services/game.service';
+import Konva from 'konva';
+import { FakeTile } from './fakeopoly/fake-tile';
+import { fakeTiles } from './fakeopoly/fake-data';
 
 @Component({
   selector: 'app-game',
@@ -58,6 +61,38 @@ export class GameComponent implements OnInit {
     return false;
   }
 
+  private setupCanvas() {
+    const width = 1200;
+    const height = 800;
+
+    const stage = new Konva.Stage({
+      container: 'konva-canvas',
+      width: width,
+      height: height,
+    });
+
+    const layer = new Konva.Layer();
+
+    const backgroud = new Konva.Rect({
+      width: width,
+      height: height,
+      fill: '#76915c',
+    });
+
+    layer.add(backgroud);
+    for (let i = 0; i < fakeTiles.length; ++i) {
+      const tile = new FakeTile(10 + i * FakeTile.WIDTH, 30, fakeTiles[i]);
+      layer.add(tile.root);
+    }
+
+    // circle.on('pointerclick', function () {
+    //   console.log('Mouseup circle');
+    // });
+
+    stage.add(layer);
+    layer.draw();
+  }
+
   async ngOnInit(): Promise<void> {
     // TODO: handle join existing game
     this.route.queryParams.subscribe(async params => {
@@ -70,10 +105,10 @@ export class GameComponent implements OnInit {
       }
     });
 
+    let gameReady: boolean = false;
+
     try {
-      if (await this.tryCreateNewGame()) {
-        return;
-      }
+      gameReady = await this.tryCreateNewGame();
     } catch (err) {
       this.log.error(`failed creating new game: ${err}`);
       await this.router.navigate(['home']);
@@ -81,8 +116,8 @@ export class GameComponent implements OnInit {
     }
 
     try {
-      if (await this.tryEnterExistingGame()) {
-        return;
+      if (!gameReady) {
+        gameReady = await this.tryEnterExistingGame();
       }
     } catch (err) {
       this.log.error(`failed re-enter existing game: ${err}`);
@@ -90,7 +125,12 @@ export class GameComponent implements OnInit {
       return;
     }
 
-    this.log.error('unknown state');
-    await this.router.navigate(['home']);
+    if (!gameReady) {
+      this.log.error('unknown state');
+      await this.router.navigate(['home']);
+      return;
+    }
+
+    this.setupCanvas();
   }
 }
