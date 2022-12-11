@@ -59,11 +59,12 @@ export class FakeTile {
     this._root.add(text);
   }
 
-  constructor(x: number, y: number, tileInfo: TileInfo) {
+  constructor(x: number, y: number, rot: number, tileInfo: TileInfo) {
     this._tileInfo = tileInfo;
     this._root = new Konva.Group({
       x: x,
       y: y,
+      rotation: rot,
       width: FakeTile.WIDTH,
       height: FakeTile.HEIGHT,
     });

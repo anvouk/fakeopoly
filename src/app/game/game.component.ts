@@ -7,6 +7,7 @@ import { Game, GameService } from '../services/game.service';
 import Konva from 'konva';
 import { FakeTile } from './fakeopoly/fake-tile';
 import { fakeTiles } from './fakeopoly/fake-data';
+import { CornerTile } from './fakeopoly/corner-Tile';
 
 @Component({
   selector: 'app-game',
@@ -17,6 +18,9 @@ import { fakeTiles } from './fakeopoly/fake-data';
 })
 export class GameComponent implements OnInit {
   private readonly log = logger('game');
+
+  private static readonly WIDTH = 1220;
+  private static readonly HEIGHT = 1220;
 
   currentGame?: Game;
   currentPlayer?: Player;
@@ -62,28 +66,82 @@ export class GameComponent implements OnInit {
   }
 
   private setupCanvas() {
-    const width = 1200;
-    const height = 800;
-
     const stage = new Konva.Stage({
       container: 'konva-canvas',
-      width: width,
-      height: height,
+      width: GameComponent.WIDTH,
+      height: GameComponent.HEIGHT,
     });
 
     const layer = new Konva.Layer();
 
     const backgroud = new Konva.Rect({
-      width: width,
-      height: height,
+      width: GameComponent.WIDTH,
+      height: GameComponent.HEIGHT,
       fill: '#76915c',
     });
-
     layer.add(backgroud);
-    for (let i = 0; i < fakeTiles.length; ++i) {
-      const tile = new FakeTile(10 + i * FakeTile.WIDTH, 30, fakeTiles[i]);
+
+    this.log.debug('begin map draw');
+
+    const CornerBottomLeft = new CornerTile(0, GameComponent.HEIGHT - CornerTile.HEIGHT);
+    layer.add(CornerBottomLeft.root);
+
+    let batch = 1;
+
+    // LEFT
+    for (let i = batch - 1; i < batch * 9; ++i) {
+      const tile = new FakeTile(
+        FakeTile.HEIGHT,
+        GameComponent.HEIGHT - CornerTile.HEIGHT - FakeTile.WIDTH - (i * FakeTile.WIDTH),
+        90,
+        fakeTiles[i]
+      );
       layer.add(tile.root);
     }
+
+    const cornerLeft = new CornerTile(0, 0);
+    layer.add(cornerLeft.root);
+
+    // UP
+    for (let i = batch - 1; i < batch * 9; ++i) {
+      const tile = new FakeTile(
+        CornerTile.WIDTH + FakeTile.WIDTH + (i * FakeTile.WIDTH),
+        FakeTile.HEIGHT,
+        180,
+        fakeTiles[i]
+      );
+      layer.add(tile.root);
+    }
+
+    const cornerRight = new CornerTile(GameComponent.HEIGHT - CornerTile.WIDTH, 0);
+    layer.add(cornerRight.root);
+
+    // RIGHT
+    for (let i = batch - 1; i < batch * 9; ++i) {
+      const tile = new FakeTile(
+        GameComponent.WIDTH - FakeTile.HEIGHT,
+        CornerTile.HEIGHT + FakeTile.WIDTH + (i * FakeTile.WIDTH),
+        270,
+        fakeTiles[i]
+      );
+      layer.add(tile.root);
+    }
+
+    const cornerBottomRight = new CornerTile(GameComponent.HEIGHT - CornerTile.WIDTH, GameComponent.WIDTH - CornerTile.WIDTH);
+    layer.add(cornerBottomRight.root);
+
+    // BOTTOM
+    for (let i = batch - 1; i < batch * 9; ++i) {
+      const tile = new FakeTile(
+        GameComponent.WIDTH - CornerTile.WIDTH - FakeTile.WIDTH - (i * FakeTile.WIDTH),
+        GameComponent.HEIGHT - FakeTile.HEIGHT,
+        0,
+        fakeTiles[i]
+      );
+      layer.add(tile.root);
+    }
+
+    this.log.debug('end map draw');
 
     // circle.on('pointerclick', function () {
     //   console.log('Mouseup circle');
