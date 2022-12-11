@@ -147,7 +147,7 @@ export class GameComponent implements OnInit {
       GameComponent.WIDTH,
       270,
       fakeCornerTiles[3],
-      );
+    );
     layer.add(cornerBottomRight.root);
 
     // BOTTOM
