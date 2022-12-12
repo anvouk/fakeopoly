@@ -2,7 +2,7 @@ import Konva from 'konva';
 import { TileInfo, TileRegularInfo, TileSpecialInfo } from './fake-data';
 import ContextMenuManager from './context-menu-manager';
 
-export class FakeTile {
+export class BoardTile {
   public static readonly WIDTH: number = 100;
   public static readonly HEIGHT: number = 160;
 
@@ -19,7 +19,7 @@ export class FakeTile {
 
   private constructRegularTile(tileInfo: TileRegularInfo) {
     const banner = new Konva.Rect({
-      width: FakeTile.WIDTH,
+      width: BoardTile.WIDTH,
       height: 30,
       fill: tileInfo.regularData.color,
       stroke: 'black',
@@ -29,8 +29,8 @@ export class FakeTile {
 
     const text = new Konva.Text({
       text: tileInfo.name.replaceAll(' ', '\n'),
-      x: FakeTile.WIDTH / 2 - FakeTile.WIDTH / 3,
-      y: FakeTile.HEIGHT / 3,
+      x: BoardTile.WIDTH / 2 - BoardTile.WIDTH / 3,
+      y: BoardTile.HEIGHT / 3,
       fontSize: 16,
       fontFamily: 'Calibri',
       align: 'center',
@@ -44,8 +44,8 @@ export class FakeTile {
     img.src = tileInfo.specialData.imageUrl;
 
     const backgroundImage = new Konva.Image({
-      x: FakeTile.WIDTH / 2 - FakeTile.WIDTH / 3,
-      y: FakeTile.HEIGHT - tileInfo.specialData.height - 20,
+      x: BoardTile.WIDTH / 2 - BoardTile.WIDTH / 3,
+      y: BoardTile.HEIGHT - tileInfo.specialData.height - 20,
       width: tileInfo.specialData.width,
       height: tileInfo.specialData.height,
       image: img,
@@ -54,7 +54,7 @@ export class FakeTile {
 
     const text = new Konva.Text({
       text: tileInfo.name.replaceAll(' ', '\n'),
-      x: FakeTile.WIDTH / 2 - FakeTile.WIDTH / 3,
+      x: BoardTile.WIDTH / 2 - BoardTile.WIDTH / 3,
       y: 20,
       fontSize: 16,
       fontFamily: 'Calibri',
@@ -70,8 +70,8 @@ export class FakeTile {
       x: x,
       y: y,
       rotation: rot,
-      width: FakeTile.WIDTH,
-      height: FakeTile.HEIGHT,
+      width: BoardTile.WIDTH,
+      height: BoardTile.HEIGHT,
     });
 
     this._root.on('contextmenu', (e) => {
@@ -80,8 +80,8 @@ export class FakeTile {
     });
 
     const background = new Konva.Rect({
-      width: FakeTile.WIDTH,
-      height: FakeTile.HEIGHT,
+      width: BoardTile.WIDTH,
+      height: BoardTile.HEIGHT,
       stroke: '#000000',
       strokeWidth: 2,
     });

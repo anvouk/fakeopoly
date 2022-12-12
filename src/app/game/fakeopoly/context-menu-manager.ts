@@ -1,11 +1,11 @@
 import Konva from 'konva';
-import { FakeTile } from './fake-tile';
+import { BoardTile } from './board-tile';
 
 export class ContextMenuManager {
   private _stage: Konva.Stage | null = null;
   private _menuNode: HTMLElement | null = null;
 
-  private _target: FakeTile | null = null;
+  private _target: BoardTile | null = null;
 
   public setup(stage: Konva.Stage) {
     this._menuNode = document.getElementById('context-menu')!;
@@ -24,7 +24,7 @@ export class ContextMenuManager {
     });
   }
 
-  public showPopup(target: FakeTile) {
+  public showPopup(target: BoardTile) {
     this._target = target;
     this._menuNode!.style.display = 'initial';
     const containerRect = this._stage!.container().getBoundingClientRect();

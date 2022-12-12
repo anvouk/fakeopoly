@@ -5,9 +5,9 @@ import logger from '../utils/logger';
 import { Player } from '../services/player.service';
 import { Game, GameService } from '../services/game.service';
 import Konva from 'konva';
-import { FakeTile } from './fakeopoly/fake-tile';
+import { BoardTile } from './fakeopoly/board-tile';
 import { fakeCornerTiles, fakeTiles } from './fakeopoly/fake-data';
-import { CornerTile } from './fakeopoly/corner-Tile';
+import { CornerTile } from './fakeopoly/corner-tile';
 import ContextMenuManager from './fakeopoly/context-menu-manager';
 
 @Component({
@@ -98,9 +98,9 @@ export class GameComponent implements OnInit {
 
     // LEFT
     for (let i = batch - 1; i < batch * 9; ++i) {
-      const tile = new FakeTile(
-        FakeTile.HEIGHT,
-        GameComponent.HEIGHT - CornerTile.HEIGHT - FakeTile.WIDTH - i * FakeTile.WIDTH,
+      const tile = new BoardTile(
+        BoardTile.HEIGHT,
+        GameComponent.HEIGHT - CornerTile.HEIGHT - BoardTile.WIDTH - i * BoardTile.WIDTH,
         90,
         fakeTiles[i],
       );
@@ -112,9 +112,9 @@ export class GameComponent implements OnInit {
 
     // UP
     for (let i = batch - 1; i < batch * 9; ++i) {
-      const tile = new FakeTile(
-        CornerTile.WIDTH + FakeTile.WIDTH + i * FakeTile.WIDTH,
-        FakeTile.HEIGHT,
+      const tile = new BoardTile(
+        CornerTile.WIDTH + BoardTile.WIDTH + i * BoardTile.WIDTH,
+        BoardTile.HEIGHT,
         180,
         fakeTiles[i],
       );
@@ -126,9 +126,9 @@ export class GameComponent implements OnInit {
 
     // RIGHT
     for (let i = batch - 1; i < batch * 9; ++i) {
-      const tile = new FakeTile(
-        GameComponent.WIDTH - FakeTile.HEIGHT,
-        CornerTile.HEIGHT + FakeTile.WIDTH + i * FakeTile.WIDTH,
+      const tile = new BoardTile(
+        GameComponent.WIDTH - BoardTile.HEIGHT,
+        CornerTile.HEIGHT + BoardTile.WIDTH + i * BoardTile.WIDTH,
         270,
         fakeTiles[i],
       );
@@ -145,9 +145,9 @@ export class GameComponent implements OnInit {
 
     // BOTTOM
     for (let i = batch - 1; i < batch * 9; ++i) {
-      const tile = new FakeTile(
-        GameComponent.WIDTH - CornerTile.WIDTH - FakeTile.WIDTH - i * FakeTile.WIDTH,
-        GameComponent.HEIGHT - FakeTile.HEIGHT,
+      const tile = new BoardTile(
+        GameComponent.WIDTH - CornerTile.WIDTH - BoardTile.WIDTH - i * BoardTile.WIDTH,
+        GameComponent.HEIGHT - BoardTile.HEIGHT,
         0,
         fakeTiles[i],
       );
