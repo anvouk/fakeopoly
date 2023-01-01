@@ -38,9 +38,7 @@
               "debug",
               "vuvuzela",
               "spark-md5",
-              "inherits",
-              "immediate",
-              "argsarray"
+              "immediate"
             ]
           },
           "configurations": {

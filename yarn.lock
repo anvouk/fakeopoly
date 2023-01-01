@@ -2676,11 +2676,6 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
-argsarray@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/argsarray/-/argsarray-0.0.1.tgz#6e7207b4ecdb39b0af88303fa5ae22bda8df61cb"
-  integrity sha512-u96dg2GcAKtpTrBdDoFIM7PjcBA+6rSP0OR94MOReNRyUECL6MtQt5XXmRr4qrftYaef9+l5hcpO5te7sML1Cg==
-
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
@@ -5553,14 +5548,12 @@ postcss@8.4.19, postcss@^8.2.14, postcss@^8.3.7, postcss@^8.4.7:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-pouchdb-browser@^7.3.1:
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/pouchdb-browser/-/pouchdb-browser-7.3.1.tgz#6b2f9f35f42d2c83fc205de5e0403c0aae7046aa"
-  integrity sha512-qZ8awkXl/woBHvEVqNHjDtwPDA7A9v4ItHtX1y1eVpKel4mlYqnIJ8K6pRcFUZmVaHinJW8K3uS32eHC1q0yOA==
+pouchdb-browser@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/pouchdb-browser/-/pouchdb-browser-8.0.0.tgz#aa133d54ed0149fc18827501f2d728b48aafc515"
+  integrity sha512-ygZa7QPcab9Rz+gkhJfc+XM1H932FhMurrbjIGC6/RTBOXyN7ZighX6pCxtbju/h5AVXPQQoilJE2O7MYasa0g==
   dependencies:
-    argsarray "0.0.1"
     immediate "3.3.0"
-    inherits "2.0.4"
     spark-md5 "3.0.2"
     uuid "8.3.2"
     vuvuzela "1.0.3"
