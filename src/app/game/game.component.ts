@@ -69,6 +69,8 @@ export class GameComponent implements OnInit {
   private setupCanvas() {
     const stage = new Konva.Stage({
       container: 'konva-canvas',
+      x: GameComponent.WIDTH / 2,
+      y: GameComponent.HEIGHT / 2,
       width: GameComponent.WIDTH,
       height: GameComponent.HEIGHT,
     });
@@ -80,7 +82,10 @@ export class GameComponent implements OnInit {
       e.evt.preventDefault();
     });
 
-    const layer = new Konva.Layer();
+    const layer = new Konva.Layer({
+      x: -GameComponent.WIDTH / 2,
+      y: -GameComponent.HEIGHT / 2,
+    });
 
     const backgroud = new Konva.Rect({
       width: GameComponent.WIDTH,
