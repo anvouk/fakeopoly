@@ -6,8 +6,7 @@ import { Player } from '../services/player.service';
 import { Game, GameService } from '../services/game.service';
 import Konva from 'konva';
 import { BoardTile } from './fakeopoly/board-tile';
-import { fakeCornerTiles, fakeTiles } from './fakeopoly/fake-data';
-import { CornerTile } from './fakeopoly/corner-tile';
+import { fakeTiles } from './fakeopoly/fake-data';
 import ContextMenuManager from './fakeopoly/context-menu-manager';
 
 @Component({
@@ -96,29 +95,37 @@ export class GameComponent implements OnInit {
 
     this.log.debug('begin map draw');
 
-    const CornerBottomLeft = new CornerTile(0, GameComponent.HEIGHT - CornerTile.HEIGHT, 0, fakeCornerTiles[0]);
-    layer.add(CornerBottomLeft.root);
+    let i = 0;
 
-    let batch = 1;
+    const CornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i]);
+    layer.add(CornerBottomLeft.root);
+    ++i;
 
     // LEFT
-    for (let i = batch - 1; i < batch * 9; ++i) {
+    for (; i < fakeTiles.length; ++i) {
+      if (fakeTiles[i].type === 'corner') {
+        break;
+      }
       const tile = new BoardTile(
         BoardTile.HEIGHT,
-        GameComponent.HEIGHT - CornerTile.HEIGHT - BoardTile.WIDTH - i * BoardTile.WIDTH,
+        GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT - BoardTile.WIDTH - ((i - 1) % 9) * BoardTile.WIDTH,
         90,
         fakeTiles[i],
       );
       layer.add(tile.root);
     }
 
-    const cornerLeft = new CornerTile(CornerTile.HEIGHT, 0, 90, fakeCornerTiles[1]);
+    const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i]);
     layer.add(cornerLeft.root);
+    ++i;
 
     // UP
-    for (let i = batch - 1; i < batch * 9; ++i) {
+    for (; i < fakeTiles.length; ++i) {
+      if (fakeTiles[i].type === 'corner') {
+        break;
+      }
       const tile = new BoardTile(
-        CornerTile.WIDTH + BoardTile.WIDTH + i * BoardTile.WIDTH,
+        BoardTile.CORNER_WIDTH + BoardTile.WIDTH + ((i - 2) % 9) * BoardTile.WIDTH,
         BoardTile.HEIGHT,
         180,
         fakeTiles[i],
@@ -126,32 +133,40 @@ export class GameComponent implements OnInit {
       layer.add(tile.root);
     }
 
-    const cornerRight = new CornerTile(GameComponent.HEIGHT, CornerTile.WIDTH, 180, fakeCornerTiles[2]);
+    const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i]);
     layer.add(cornerRight.root);
+    ++i;
 
     // RIGHT
-    for (let i = batch - 1; i < batch * 9; ++i) {
+    for (; i < fakeTiles.length; ++i) {
+      if (fakeTiles[i].type === 'corner') {
+        break;
+      }
       const tile = new BoardTile(
         GameComponent.WIDTH - BoardTile.HEIGHT,
-        CornerTile.HEIGHT + BoardTile.WIDTH + i * BoardTile.WIDTH,
+        BoardTile.CORNER_HEIGHT + BoardTile.WIDTH + ((i - 3) % 9) * BoardTile.WIDTH,
         270,
         fakeTiles[i],
       );
       layer.add(tile.root);
     }
 
-    const cornerBottomRight = new CornerTile(
-      GameComponent.HEIGHT - CornerTile.WIDTH,
+    const cornerBottomRight = new BoardTile(
+      GameComponent.HEIGHT - BoardTile.CORNER_WIDTH,
       GameComponent.WIDTH,
       270,
-      fakeCornerTiles[3],
+      fakeTiles[i],
     );
     layer.add(cornerBottomRight.root);
+    ++i;
 
     // BOTTOM
-    for (let i = batch - 1; i < batch * 9; ++i) {
+    for (; i < fakeTiles.length; ++i) {
+      if (fakeTiles[i].type === 'corner') {
+        break;
+      }
       const tile = new BoardTile(
-        GameComponent.WIDTH - CornerTile.WIDTH - BoardTile.WIDTH - i * BoardTile.WIDTH,
+        GameComponent.WIDTH - BoardTile.CORNER_WIDTH - BoardTile.WIDTH - ((i - 4) % 9) * BoardTile.WIDTH,
         GameComponent.HEIGHT - BoardTile.HEIGHT,
         0,
         fakeTiles[i],
