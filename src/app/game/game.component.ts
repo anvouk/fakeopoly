@@ -65,9 +65,9 @@ export class GameComponent implements OnInit {
     let tiles: BoardTile[] = [];
     let i = 0;
 
-    const CornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i]);
-    layer.add(CornerBottomLeft.root);
-    tiles.push(CornerBottomLeft);
+    const cornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i]);
+    layer.add(cornerBottomLeft.root);
+    tiles.push(cornerBottomLeft);
     ++i;
 
     // LEFT
@@ -160,7 +160,8 @@ export class GameComponent implements OnInit {
     const currentPlayer = new Player(
       { nickname: 'test', isHost: true },
       new PlayerPin(fakePlayerPins[0]),
-      CornerBottomLeft
+      cornerBottomLeft,
+      this.gameStateService,
     );
 
     stage.add(layer);

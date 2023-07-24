@@ -33,6 +33,22 @@ export class ContextMenuManager {
 
       this._player!.moveToTile(this._target);
     });
+
+    document.getElementById('move-prev')!.addEventListener('click', () => {
+      if (this._target == null) {
+        return;
+      }
+
+      this._player!.moveToNextTile();
+    });
+
+    document.getElementById('move-next')!.addEventListener('click', () => {
+      if (this._target == null) {
+        return;
+      }
+
+      this._player!.moveToPrevTile();
+    });
   }
 
   public showPopup(target: BoardTile) {

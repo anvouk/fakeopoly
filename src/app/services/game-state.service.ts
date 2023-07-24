@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { Game, GameService } from "./game.service";
 import { Player } from "../game/fakeopoly/player";
 import { BoardTile } from "../game/fakeopoly/board-tile";
