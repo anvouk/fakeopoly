@@ -375,3 +375,15 @@ export const fakeTiles: TileInfo[] = [
     },
   },
 ];
+
+export interface PlayerPinInfo {
+  name: string;
+  imageUrl: string;
+}
+
+export const fakePlayerPins: PlayerPinInfo[] = [
+  {
+    name: 'demo',
+    imageUrl: 'http://localhost:4200/assets/player.png',
+  }
+];
