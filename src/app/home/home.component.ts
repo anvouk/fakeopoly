@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import logger from '../utils/logger';
 import { MatButtonModule } from '@angular/material/button';
 import { PlayerService } from '../services/player.service';
 import { GameCreationOptions, GameService } from '../services/game.service';
@@ -21,8 +20,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  private readonly log = logger('home');
-
   constructor(
     private readonly router: Router,
     private readonly gameService: GameService,
@@ -31,7 +28,7 @@ export class HomeComponent {
   ) {}
 
   async beginNewGameCreation() {
-    this.log.debug('beginNewGameCreation');
+    console.log('beginNewGameCreation');
     this.openCreateNewGameDialog();
   }
 
@@ -48,7 +45,7 @@ export class HomeComponent {
   }
 
   async createNewGame(gameOpts: GameCreationOptions) {
-    this.log.debug(`creating new game with options: ${JSON.stringify(gameOpts)}`);
+    console.log(`creating new game with options: ${JSON.stringify(gameOpts)}`);
     const game = await this.gameService.createNewGame(gameOpts);
     await this.router.navigate(['game'], {
       state: {
@@ -58,6 +55,6 @@ export class HomeComponent {
   }
 
   async joinGame() {
-    this.log.debug('joinGame');
+    console.log('joinGame');
   }
 }

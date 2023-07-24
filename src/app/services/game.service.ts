@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { PouchserverService } from './pouchserver.service';
-import logger from '../utils/logger';
 import { Player } from './player.service';
 
 export interface Game {
@@ -21,8 +20,6 @@ export interface GameCreationOptions {
   providedIn: 'root'
 })
 export class GameService {
-  private readonly log = logger('game');
-
   constructor(
     private readonly pouchServer: PouchserverService
   ) {}

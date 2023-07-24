@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import logger from '../utils/logger';
 import { Player } from '../services/player.service';
 import { Game, GameService } from '../services/game.service';
 import Konva from 'konva';
@@ -17,8 +16,6 @@ import ContextMenuManager from './fakeopoly/context-menu-manager';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  private readonly log = logger('game');
-
   private static readonly WIDTH = 1220;
   private static readonly HEIGHT = 1220;
 
@@ -55,7 +52,7 @@ export class GameComponent implements OnInit {
   private async tryCreateNewGame(): Promise<boolean> {
     const game = window.history.state?.game;
     if (game != null) {
-      this.log.debug(`found game: ${JSON.stringify(game)}`);
+      console.log(`found game: ${JSON.stringify(game)}`);
       this.currentGame = game;
       this.currentPlayer = game.players[0];
       localStorage.setItem('gameId', this.currentGame!._id);
@@ -93,7 +90,7 @@ export class GameComponent implements OnInit {
     });
     layer.add(backgroud);
 
-    this.log.debug('begin map draw');
+    console.log('begin map draw');
 
     let i = 0;
 
@@ -174,7 +171,7 @@ export class GameComponent implements OnInit {
       layer.add(tile.root);
     }
 
-    this.log.debug('end map draw');
+    console.log('end map draw');
 
     // circle.on('pointerclick', function () {
     //   console.log('Mouseup circle');
@@ -189,8 +186,8 @@ export class GameComponent implements OnInit {
     this.route.queryParams.subscribe(async (params) => {
       const joinGameId = params['id'];
       if (joinGameId != null) {
-        this.log.debug(`joinGameId: ${joinGameId}`);
-        this.log.error('UNHANDLED');
+        console.log(`joinGameId: ${joinGameId}`);
+        console.error('UNHANDLED');
         await this.router.navigate(['home']);
         return;
       }
@@ -201,7 +198,7 @@ export class GameComponent implements OnInit {
     try {
       gameReady = await this.tryCreateNewGame();
     } catch (err) {
-      this.log.error(`failed creating new game: ${err}`);
+      console.error(`failed creating new game: ${err}`);
       await this.router.navigate(['home']);
       return;
     }
@@ -211,13 +208,13 @@ export class GameComponent implements OnInit {
         gameReady = await this.tryEnterExistingGame();
       }
     } catch (err) {
-      this.log.error(`failed re-enter existing game: ${err}`);
+      console.error(`failed re-enter existing game: ${err}`);
       await this.router.navigate(['home']);
       return;
     }
 
     if (!gameReady) {
-      this.log.error('unknown state');
+      console.error('unknown state');
       await this.router.navigate(['home']);
       return;
     }

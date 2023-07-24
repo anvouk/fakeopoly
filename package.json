@@ -21,7 +21,6 @@
     "@angular/platform-browser": "^16.1.6",
     "@angular/platform-browser-dynamic": "^16.1.6",
     "@angular/router": "^16.1.6",
-    "debug": "^4.3.4",
     "konva": "^9.2.0",
     "pouchdb-browser": "^8.0.0",
     "rxjs": "^7.8.1",

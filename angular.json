@@ -35,10 +35,11 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "debug",
               "vuvuzela",
               "spark-md5",
-              "immediate"
+              "immediate",
+              "konva",
+              "events"
             ]
           },
           "configurations": {
