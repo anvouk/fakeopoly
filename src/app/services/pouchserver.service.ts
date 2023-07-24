@@ -15,7 +15,7 @@ export class PouchserverService {
       name: options.name,
       minPlayers: options.minPlayers || 2,
       maxPlayers: options.maxPlayers || 8,
-      players: [
+      playersInfo: [
         {
           nickname: 'hostUser',
           isHost: true,
@@ -80,11 +80,11 @@ export class PouchserverService {
       throw new Error('cannot add player to game since game does not exist');
     }
 
-    if (game.players.length >= game.maxPlayers) {
+    if (game.playersInfo.length >= game.maxPlayers) {
       throw new Error('cannot add player to game since players limit reached');
     }
 
-    game.players.push({
+    game.playersInfo.push({
       nickname: playerNickname,
       isHost: false,
     });
@@ -97,12 +97,12 @@ export class PouchserverService {
       throw new Error('cannot remove player to game since game does not exist');
     }
 
-    const playerToRemoveIdx = game.players.findIndex(p => p.nickname === playerNickname);
+    const playerToRemoveIdx = game.playersInfo.findIndex(p => p.nickname === playerNickname);
     if (playerToRemoveIdx == -1) {
       throw new Error('cannot remove player to game since player does not exist');
     }
 
-    game.players.splice(playerToRemoveIdx, 1);
+    game.playersInfo.splice(playerToRemoveIdx, 1);
     await this.dbGames.put(game);
   }
 }

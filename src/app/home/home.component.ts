@@ -48,8 +48,8 @@ export class HomeComponent {
     console.log(`creating new game with options: ${JSON.stringify(gameOpts)}`);
     const game = await this.gameService.createNewGame(gameOpts);
     await this.router.navigate(['game'], {
-      state: {
-        game: game,
+      queryParams: {
+        id: game._id,
       }
     });
   }
