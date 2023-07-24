@@ -11,7 +11,7 @@ export class GameStateService {
   private _currentGame: Game;
   // @ts-ignore
   private _currentPlayer: Player;
-  private _tiles: BoardTile[] = [];
+  private _tiles: Map<number, BoardTile> = new Map<number, BoardTile>();
 
   constructor(
     private readonly gameService: GameService,
@@ -20,7 +20,7 @@ export class GameStateService {
   public setup(game: Game, currentPlayer: Player, tiles: BoardTile[]) {
     this._currentGame = game;
     this._currentPlayer = currentPlayer;
-    this._tiles = tiles;
+    tiles.forEach(t => this._tiles.set(t.tileInfo.id, t));
   }
 
   public get game(): Game {
@@ -31,7 +31,12 @@ export class GameStateService {
     return this._currentPlayer;
   }
 
-  public get tiles(): BoardTile[] {
+  public get tiles(): Map<number, BoardTile> {
     return this._tiles;
+  }
+
+  public getTileById(id: number): BoardTile {
+    // using modulo to ensure no out-of-bounds error will ever occur.
+    return this._tiles.get(Math.abs(id) % this._tiles.size)!;
   }
 }

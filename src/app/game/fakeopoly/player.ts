@@ -40,23 +40,23 @@ export class Player {
     const currentTileIdx = this._currentTile.tileInfo.id;
     let nextTile;
     // loop board check
-    if (currentTileIdx >= this._gameStateService.tiles.length - 1) {
-      nextTile = this._gameStateService.tiles.find(t => t.tileInfo.id === 0)!;
+    if (currentTileIdx >= this._gameStateService.tiles.size - 1) {
+      nextTile = this._gameStateService.getTileById(0);
     } else {
-      nextTile = this._gameStateService.tiles.find(t => t.tileInfo.id === currentTileIdx + 1)!;
+      nextTile = this._gameStateService.getTileById(currentTileIdx + 1);
     }
     this.moveToTile(nextTile);
   }
 
   public moveToPrevTile() {
     const currentTileIdx = this._currentTile.tileInfo.id;
-    let nextTile;
+    let prevTile;
     // loop board check
     if (currentTileIdx === 0) {
-      nextTile = this._gameStateService.tiles.find(t => t.tileInfo.id === this._gameStateService.tiles.length - 1)!;
+      prevTile = this._gameStateService.getTileById(this._gameStateService.tiles.size - 1);
     } else {
-      nextTile = this._gameStateService.tiles.find(t => t.tileInfo.id === currentTileIdx - 1)!;
+      prevTile = this._gameStateService.getTileById(currentTileIdx - 1);
     }
-    this.moveToTile(nextTile);
+    this.moveToTile(prevTile);
   }
 }
