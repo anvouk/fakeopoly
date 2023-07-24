@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PouchserverService } from './pouchserver.service';
 
-export interface Player {
+export interface PlayerInfo {
   nickname: string,
   isHost: boolean,
 }

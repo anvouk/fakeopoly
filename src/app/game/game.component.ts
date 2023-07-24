@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Player } from '../services/player.service';
 import { Game, GameService } from '../services/game.service';
 import Konva from 'konva';
 import { BoardTile } from './fakeopoly/board-tile';
-import { fakeTiles } from './fakeopoly/fake-data';
+import { fakePlayerPins, fakeTiles, TileInfo } from "./fakeopoly/fake-data";
 import ContextMenuManager from './fakeopoly/context-menu-manager';
+import { Player } from "./fakeopoly/player";
+import { PlayerPin } from "./fakeopoly/player-pin";
 
 @Component({
   selector: 'app-game',
@@ -21,6 +22,8 @@ export class GameComponent implements OnInit {
 
   currentGame?: Game;
   currentPlayer?: Player;
+
+  private readonly tiles: BoardTile[] = [];
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -37,9 +40,7 @@ export class GameComponent implements OnInit {
       if (game == null) {
         throw new Error(`game does not exist anymore: ${existingGameId}`);
       }
-      const meInGame = localStorage.getItem('playerId');
       this.currentGame = game;
-      this.currentPlayer = this.currentGame.players.find((p) => p.nickname === meInGame);
       if (this.currentPlayer == undefined) {
         throw new Error('your player does not exist inside game');
       }
@@ -55,8 +56,10 @@ export class GameComponent implements OnInit {
       console.log(`found game: ${JSON.stringify(game)}`);
       this.currentGame = game;
       this.currentPlayer = game.players[0];
+      const meInGame = localStorage.getItem('playerId');
+      const me = game.players.find((p: any) => p.nickname === meInGame)!;
       localStorage.setItem('gameId', this.currentGame!._id);
-      localStorage.setItem('playerId', this.currentPlayer!.nickname);
+      localStorage.setItem('playerId', me.nickname);
       return true;
     }
     return false;
@@ -70,7 +73,6 @@ export class GameComponent implements OnInit {
       width: GameComponent.WIDTH,
       height: GameComponent.HEIGHT,
     });
-    ContextMenuManager.setup(stage);
 
     // register empty right click event simply to prevent default
     // context menu, which is annoying.
@@ -96,6 +98,7 @@ export class GameComponent implements OnInit {
 
     const CornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i]);
     layer.add(CornerBottomLeft.root);
+    this.tiles.push(CornerBottomLeft);
     ++i;
 
     // LEFT
@@ -110,10 +113,12 @@ export class GameComponent implements OnInit {
         fakeTiles[i],
       );
       layer.add(tile.root);
+      this.tiles.push(tile);
     }
 
     const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i]);
     layer.add(cornerLeft.root);
+    this.tiles.push(cornerLeft);
     ++i;
 
     // UP
@@ -128,10 +133,12 @@ export class GameComponent implements OnInit {
         fakeTiles[i],
       );
       layer.add(tile.root);
+      this.tiles.push(tile);
     }
 
     const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i]);
     layer.add(cornerRight.root);
+    this.tiles.push(cornerRight);
     ++i;
 
     // RIGHT
@@ -146,6 +153,7 @@ export class GameComponent implements OnInit {
         fakeTiles[i],
       );
       layer.add(tile.root);
+      this.tiles.push(tile);
     }
 
     const cornerBottomRight = new BoardTile(
@@ -155,6 +163,7 @@ export class GameComponent implements OnInit {
       fakeTiles[i],
     );
     layer.add(cornerBottomRight.root);
+    this.tiles.push(cornerBottomRight);
     ++i;
 
     // BOTTOM
@@ -169,6 +178,7 @@ export class GameComponent implements OnInit {
         fakeTiles[i],
       );
       layer.add(tile.root);
+      this.tiles.push(tile);
     }
 
     console.log('end map draw');
@@ -177,8 +187,18 @@ export class GameComponent implements OnInit {
     //   console.log('Mouseup circle');
     // });
 
+    // player setup
+    const meInGame = localStorage.getItem('playerId');
+    this.currentPlayer = new Player(
+      this.currentGame!.players.find((p) => p.nickname === meInGame)!,
+      new PlayerPin(fakePlayerPins[0]),
+      CornerBottomLeft
+    );
+
     stage.add(layer);
     layer.draw();
+
+    ContextMenuManager.setup(stage, this.currentPlayer);
   }
 
   async ngOnInit(): Promise<void> {

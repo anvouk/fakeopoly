@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { PouchserverService } from './pouchserver.service';
-import { Player } from './player.service';
+import { PlayerInfo } from './player.service';
 
 export interface Game {
   _id: string,
   name: string,
   minPlayers: number,
   maxPlayers: number,
-  players: Player[],
+  players: PlayerInfo[],
 }
 
 export interface GameCreationOptions {

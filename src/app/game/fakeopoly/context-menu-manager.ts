@@ -1,13 +1,16 @@
 import Konva from 'konva';
 import { BoardTile } from './board-tile';
+import { Player } from "./player";
 
 export class ContextMenuManager {
   private _stage: Konva.Stage | null = null;
+  private _player: Player | null = null;
   private _menuNode: HTMLElement | null = null;
 
   private _target: BoardTile | null = null;
 
-  public setup(stage: Konva.Stage) {
+  public setup(stage: Konva.Stage, player: Player) {
+    this._player = player;
     this._menuNode = document.getElementById('context-menu')!;
     window.addEventListener('click', () => {
       // hide menu
@@ -21,6 +24,14 @@ export class ContextMenuManager {
       }
 
       console.log(JSON.stringify(this._target.tileInfo));
+    });
+
+    document.getElementById('move-here')!.addEventListener('click', () => {
+      if (this._target == null) {
+        return;
+      }
+
+      this._player!.moveToTile(this._target);
     });
   }
 

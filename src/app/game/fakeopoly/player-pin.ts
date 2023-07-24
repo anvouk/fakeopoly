@@ -1,5 +1,6 @@
 import { PlayerPinInfo } from './fake-data';
 import Konva from 'konva';
+import { BoardTile } from "./board-tile";
 
 export class PlayerPin {
   public static readonly WIDTH: number = 64;
@@ -11,10 +12,10 @@ export class PlayerPin {
     return this._root;
   }
 
-  public constructor(x: number, y: number, pinInfo: PlayerPinInfo) {
+  public constructor(pinInfo: PlayerPinInfo) {
     this._root = new Konva.Group({
-      x: x,
-      y: y,
+      x: BoardTile.WIDTH / 2 - PlayerPin.WIDTH / 2,
+      y: BoardTile.HEIGHT / 2 - PlayerPin.HEIGHT / 2,
       width: PlayerPin.WIDTH,
       height: PlayerPin.HEIGHT,
     });
