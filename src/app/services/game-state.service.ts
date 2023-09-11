@@ -38,11 +38,30 @@ export class GameStateService {
     return this._tiles.get(Math.abs(id) % this._tiles.size)!;
   }
 
+  private _doneMoving: boolean = true;
   public async turnLoop() {
-    const moveNum = (await gameService.rollDices()).total;
-    for (let i = moveNum; i > 0; --i) {
-      this.player.moveToNextTile();
+    if (!this._doneMoving) {
+      console.warn('player is still moving! skipping...');
+      return;
     }
+
+    const moveNum = (await gameService.rollDices()).total;
+
+    function move(self: GameStateService, player: Player, movesRemaining: number) {
+      player.moveToNextTile();
+      movesRemaining--;
+      if (movesRemaining <= 0) {
+        self._doneMoving = true;
+        return;
+      }
+
+      setTimeout(() => {
+        move(self, player, movesRemaining);
+      }, 100);
+    }
+
+    this._doneMoving = false;
+    move(this, this.player, moveNum);
   }
 }
 
