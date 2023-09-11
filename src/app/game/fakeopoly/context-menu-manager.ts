@@ -55,7 +55,7 @@ export class ContextMenuManager {
     this._target = target;
     this._menuNode!.style.display = 'initial';
     const containerRect = this._stage!.container().getBoundingClientRect();
-    this._menuNode!.style.top = containerRect.top + this._stage!.getPointerPosition()!.y + 20 + 'px';
+    this._menuNode!.style.top = containerRect.top + this._stage!.getPointerPosition()!.y + 20 + window.scrollY + 'px';
     this._menuNode!.style.left = containerRect.left + this._stage!.getPointerPosition()!.x + 20 + 'px';
   }
 }
