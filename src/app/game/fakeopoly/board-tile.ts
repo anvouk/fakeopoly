@@ -101,9 +101,32 @@ export class BoardTile {
       ContextMenuManager.showPopup(this);
     });
 
+    // tile hover overlay setup
+    if (tileInfo.type !== 'corner') {
+      const backgroundHover = new Konva.Rect({
+        width: width,
+        height: height,
+        stroke: '#000000',
+        strokeWidth: 2,
+        fill: '#ffffff',
+        opacity: 0.15,
+      });
+      this._root.add(backgroundHover);
+
+      this._root.on('mouseenter', (e) => {
+        document.body.style.cursor = 'pointer';
+        backgroundHover.setZIndex(3);
+      });
+      this._root.on('mouseleave', (e) => {
+        document.body.style.cursor = 'default';
+        backgroundHover.setZIndex(0);
+      });
+    }
+
     const background = new Konva.Rect({
       width: width,
       height: height,
+      fill: '#75905b',
       stroke: '#000000',
       strokeWidth: 2,
     });
