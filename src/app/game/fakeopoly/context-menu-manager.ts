@@ -55,7 +55,14 @@ export class ContextMenuManager {
     this._target = target;
     this._menuNode!.style.display = 'initial';
     const containerRect = this._stage!.container().getBoundingClientRect();
-    this._menuNode!.style.top = containerRect.top + this._stage!.getPointerPosition()!.y + 20 + window.scrollY + 'px';
+
+    // TODO: fix scaling on higher res displays
+    let yPos = containerRect.top + this._stage!.getPointerPosition()!.y + 20 + window.scrollY;
+    if (yPos + 300 > (window.outerHeight + window.scrollY)) {
+      yPos -= 180;
+    }
+
+    this._menuNode!.style.top = yPos + 'px';
     this._menuNode!.style.left = containerRect.left + this._stage!.getPointerPosition()!.x + 20 + 'px';
   }
 }
