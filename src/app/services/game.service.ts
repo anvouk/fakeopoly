@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { PouchserverService } from './pouchserver.service';
+import pouchserverService from './pouchserver.service';
 import { PlayerInfo } from './player.service';
 
 export interface Game {
@@ -16,27 +15,40 @@ export interface GameCreationOptions {
   maxPlayers?: number,
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GameService {
+export class DiceRoll {
   constructor(
-    private readonly pouchServer: PouchserverService
+    public readonly d1: number,
+    public readonly d2: number,
   ) {}
 
+  public get total(): number {
+    return this.d1 + this.d2;
+  }
+}
+
+/**
+ * Handles low level interactions with backend.
+ */
+export class GameService {
   public async createNewGame(options: GameCreationOptions): Promise<Game> {
-    return this.pouchServer.createNewGame(options);
+    return pouchserverService.createNewGame(options);
   }
 
   public async getGame(gameId: string): Promise<Game | null> {
-    return this.pouchServer.getGame(gameId);
+    return pouchserverService.getGame(gameId);
   }
 
   public async editGame(gameId: string, options: GameCreationOptions): Promise<Game> {
-    return this.pouchServer.editGame(gameId, options);
+    return pouchserverService.editGame(gameId, options);
   }
 
   public async deleteGame(gameId: string): Promise<void> {
-    return this.pouchServer.deleteGame(gameId);
+    return pouchserverService.deleteGame(gameId);
+  }
+
+  public async rollDices(): Promise<DiceRoll> {
+    return pouchserverService.rollDices();
   }
 }
+
+export default new GameService();

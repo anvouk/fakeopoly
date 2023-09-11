@@ -1,6 +1,7 @@
 import Konva from 'konva';
 import { BoardTile } from './board-tile';
 import { Player } from "./player";
+import gameStateService from "../../services/game-state.service";
 
 export class ContextMenuManager {
   private _stage: Konva.Stage | null = null;
@@ -48,6 +49,14 @@ export class ContextMenuManager {
       }
 
       this._player!.moveToPrevTile();
+    });
+
+    document.getElementById('handle-turn')!.addEventListener('click', async () => {
+      if (this._target == null) {
+        return;
+      }
+
+      await gameStateService.turnLoop();
     });
   }
 

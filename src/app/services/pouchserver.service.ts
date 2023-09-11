@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb-browser';
-import { GameCreationOptions, Game } from './game.service';
+import { GameCreationOptions, Game, DiceRoll } from "./game.service";
 import { v4 as uuidv4 } from 'uuid';
 
-@Injectable({
-  providedIn: 'root'
-})
+/**
+ * Dev fake backed/db.
+ * This class will be replaced with real-backend in gameService class.
+ */
 export class PouchserverService {
   private readonly dbGames = new PouchDB<Game>('games');
 
@@ -105,4 +105,13 @@ export class PouchserverService {
     game.playersInfo.splice(playerToRemoveIdx, 1);
     await this.dbGames.put(game);
   }
+
+  public async rollDices(): Promise<DiceRoll> {
+    const d1 = Math.floor((Math.random() * 100) % 6) + 1;
+    const d2 = Math.floor((Math.random() * 100) % 6) + 1;
+    console.log(`[DICE ROLL] d1: ${d1}, d2: ${d2} | ${d1 + d2}`);
+    return new DiceRoll(d1, d2);
+  }
 }
+
+export default new PouchserverService();

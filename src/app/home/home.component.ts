@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { PlayerService } from '../services/player.service';
-import { GameCreationOptions, GameService } from '../services/game.service';
+import gameService, { GameCreationOptions } from '../services/game.service';
 import { Router } from '@angular/router';
 import { CreateModalComponent } from './create-modal/create-modal.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -22,8 +21,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 export class HomeComponent {
   constructor(
     private readonly router: Router,
-    private readonly gameService: GameService,
-    private readonly playerService: PlayerService,
     private readonly dialog: MatDialog
   ) {}
 
@@ -46,7 +43,7 @@ export class HomeComponent {
 
   async createNewGame(gameOpts: GameCreationOptions) {
     console.log(`creating new game with options: ${JSON.stringify(gameOpts)}`);
-    const game = await this.gameService.createNewGame(gameOpts);
+    const game = await gameService.createNewGame(gameOpts);
     await this.router.navigate(['game'], {
       queryParams: {
         id: game._id,

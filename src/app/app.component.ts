@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PouchserverService } from './services/pouchserver.service';
-import { GameService } from './services/game.service';
-import { PlayerService } from './services/player.service';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
 
@@ -16,11 +13,7 @@ import { GameComponent } from './game/game.component';
     HomeComponent,
     GameComponent,
   ],
-  providers: [
-    PouchserverService,
-    PlayerService,
-    GameService,
-  ],
+  providers: [],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

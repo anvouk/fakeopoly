@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameService } from '../services/game.service';
 import Konva from 'konva';
 import { BoardTile } from './fakeopoly/board-tile';
 import { fakePlayerPins, fakeTiles } from "./fakeopoly/fake-data";
-import ContextMenuManager from './fakeopoly/context-menu-manager';
+import contextMenuManager from './fakeopoly/context-menu-manager';
 import { Player } from "./fakeopoly/player";
 import { PlayerPin } from "./fakeopoly/player-pin";
-import { GameStateService } from "../services/game-state.service";
+import gameService from "../services/game.service";
+import gameStateService from "../services/game-state.service";
 
 @Component({
   selector: 'app-game',
@@ -24,12 +24,10 @@ export class GameComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly gameStateService: GameStateService,
-    private readonly gameService: GameService,
   ) {}
 
   private async setupCanvas(gameId: string) {
-    const game = await this.gameService.getGame(gameId);
+    const game = await gameService.getGame(gameId);
     if (game == null) {
       throw new Error(`game does not exist: ${gameId}`);
     }
@@ -161,18 +159,18 @@ export class GameComponent implements OnInit {
       { nickname: 'test', isHost: true },
       new PlayerPin(fakePlayerPins[0]),
       cornerBottomLeft,
-      this.gameStateService,
+      gameStateService,
     );
 
     stage.add(layer);
     layer.draw();
 
-    this.gameStateService.setup(
+    gameStateService.setup(
       game,
       currentPlayer,
       tiles,
     );
-    ContextMenuManager.setup(stage, currentPlayer);
+    contextMenuManager.setup(stage, currentPlayer);
   }
 
   async ngOnInit(): Promise<void> {
