@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./dist:/dist:ro
