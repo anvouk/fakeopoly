@@ -56,7 +56,9 @@ export class ContextMenuManager {
         return;
       }
 
-      await gameStateService.turnLoop();
+      await gameStateService.turnLoop(() => {
+        console.log(`player endend on tile: ${JSON.stringify(this._player!.tile.tileInfo)}`);
+      });
     });
   }
 

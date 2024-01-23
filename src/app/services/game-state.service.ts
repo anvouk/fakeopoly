@@ -38,8 +38,10 @@ export class GameStateService {
     return this._tiles.get(Math.abs(id) % this._tiles.size)!;
   }
 
+  // TODO: convert in turn lock
   private _doneMoving: boolean = true;
-  public async turnLoop() {
+
+  public async turnLoop(doneMoving: () => void) {
     if (!this._doneMoving) {
       console.warn('player is still moving! skipping...');
       return;
@@ -47,21 +49,22 @@ export class GameStateService {
 
     const moveNum = (await gameService.rollDices()).total;
 
-    function move(self: GameStateService, player: Player, movesRemaining: number) {
+    function move(self: GameStateService, player: Player, movesRemaining: number, doneMoving: () => void) {
       player.moveToNextTile();
       movesRemaining--;
       if (movesRemaining <= 0) {
         self._doneMoving = true;
+        doneMoving();
         return;
       }
 
-      setTimeout(() => {
-        move(self, player, movesRemaining);
+      setTimeout(async () => {
+        move(self, player, movesRemaining, doneMoving);
       }, 100);
     }
 
     this._doneMoving = false;
-    move(this, this.player, moveNum);
+    move(this, this.player, moveNum, doneMoving);
   }
 }
 
