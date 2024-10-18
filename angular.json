@@ -44,9 +44,7 @@
             "outputPath": "dist/fakeopoly-gui",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -61,7 +59,6 @@
             "allowedCommonJsDependencies": [
               "vuvuzela",
               "spark-md5",
-              "immediate",
               "konva",
               "events"
             ]
