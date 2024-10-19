@@ -1,5 +1,5 @@
 import Konva from 'konva';
-import { TileCornerInfo, TileInfo, TileRegularInfo, TileSpecialInfo } from './fake-data';
+import { TileCornerInfo, TileInfo, TileRegularInfo, TileSpecialInfo, TileType } from './fake-data';
 
 export type OnTileRightClick = (tile: BoardTile) => void;
 
@@ -133,10 +133,10 @@ export class BoardTile {
     this._root.add(background);
 
     switch (tileInfo.type) {
-      case 'regular':
+      case TileType.Regular:
         this.constructRegularTile(tileInfo);
         break;
-      case 'special':
+      case TileType.Special:
         this.constructSpecialTile(tileInfo);
         break;
       case 'corner':
