@@ -1,6 +1,7 @@
 import Konva from 'konva';
 import { TileCornerInfo, TileInfo, TileRegularInfo, TileSpecialInfo } from './fake-data';
-import ContextMenuManager from './context-menu-manager';
+
+export type OnTileRightClick = (tile: BoardTile) => void;
 
 export class BoardTile {
   public static readonly WIDTH: number = 100;
@@ -79,7 +80,7 @@ export class BoardTile {
     this._root.add(backgroundImage);
   }
 
-  constructor(x: number, y: number, rot: number, tileInfo: TileInfo) {
+  constructor(x: number, y: number, rot: number, tileInfo: TileInfo, onRightClick: OnTileRightClick) {
     this._tileInfo = tileInfo;
 
     let width = BoardTile.WIDTH;
@@ -96,32 +97,31 @@ export class BoardTile {
       width: width,
       height: height,
     });
+
     this._root.on('contextmenu', (e) => {
       e.evt.preventDefault();
-      ContextMenuManager.showPopup(this);
+      onRightClick(this);
     });
 
     // tile hover overlay setup
-    if (tileInfo.type !== 'corner') {
-      const backgroundHover = new Konva.Rect({
-        width: width,
-        height: height,
-        stroke: '#000000',
-        strokeWidth: 2,
-        fill: '#ffffff',
-        opacity: 0.15,
-      });
-      this._root.add(backgroundHover);
+    const backgroundHover = new Konva.Rect({
+      width: width,
+      height: height,
+      stroke: '#000000',
+      strokeWidth: 2,
+      fill: '#ffffff',
+      opacity: 0.15,
+    });
+    this._root.add(backgroundHover);
 
-      this._root.on('mouseenter', (e) => {
-        document.body.style.cursor = 'pointer';
-        backgroundHover.setZIndex(3);
-      });
-      this._root.on('mouseleave', (e) => {
-        document.body.style.cursor = 'default';
-        backgroundHover.setZIndex(0);
-      });
-    }
+    this._root.on('mouseenter', (e) => {
+      document.body.style.cursor = 'pointer';
+      backgroundHover.setZIndex(3);
+    });
+    this._root.on('mouseleave', (e) => {
+      document.body.style.cursor = 'default';
+      backgroundHover.setZIndex(0);
+    });
 
     const background = new Konva.Rect({
       width: width,
