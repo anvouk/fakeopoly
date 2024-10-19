@@ -2,7 +2,6 @@
   margin: auto;
   width: 1220px;
   height: 1220px;
-  border: 1px solid purple;
   padding: 1em;
 }
 
@@ -10,17 +9,29 @@
 #context-menu {
   display: none;
   position: absolute;
-  width: 120px;
+  width: 8rem;
   background-color: white;
-  box-shadow: 0 0 5px grey;
-  border-radius: 3px;
+  box-shadow: 0.2rem 0.2rem 0.2rem black;
+
+  hr {
+    margin: 0;
+  }
+
+  p {
+    color: gray;
+    text-align: center;
+    background-color: whitesmoke;
+    border: none;
+    margin: 0;
+    padding: 0.5rem;
+  }
 
   button {
     width: 100%;
     background-color: white;
     border: none;
     margin: 0;
-    padding: 10px;
+    padding: 0.5rem;
   }
 
   button:hover {

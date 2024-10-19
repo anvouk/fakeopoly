@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
@@ -17,12 +17,5 @@ import { GameComponent } from './game/game.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'angularFakeopoly';
-
-  constructor(
-  ) {}
-
-  ngOnInit(): void {
-  }
+export class AppComponent {
 }
