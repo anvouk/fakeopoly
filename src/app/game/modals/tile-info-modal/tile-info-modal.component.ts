@@ -13,7 +13,7 @@ import { MatInput } from '@angular/material/input';
 import { TileInfo } from '../../fakeopoly/fake-data';
 
 @Component({
-  selector: 'app-propery-info-modal',
+  selector: 'app-tile-info-modal',
   standalone: true,
   imports: [
     FormsModule,
