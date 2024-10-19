@@ -82,7 +82,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 6,
-    name: 'Imprevis-\nti',
+    name: 'Imprevisti',
     type: 'special',
     specialData: {
       imageUrl: 'http://localhost:4200/assets/test.png',
@@ -102,7 +102,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 8,
-    name: 'Corso Magella-\nno',
+    name: 'Corso Magellano',
     type: 'regular',
     regularData: {
       color: '#e5791e',
@@ -168,7 +168,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 16,
-    name: 'Imprevis-\nti',
+    name: 'Imprevisti',
     type: 'special',
     specialData: {
       imageUrl: 'http://localhost:4200/assets/test.png',
@@ -188,7 +188,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 18,
-    name: 'Corso Magella-\nno',
+    name: 'Corso Magellano',
     type: 'regular',
     regularData: {
       color: '#000000',
@@ -254,7 +254,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 26,
-    name: 'Imprevis-\nti',
+    name: 'Imprevisti',
     type: 'special',
     specialData: {
       imageUrl: 'http://localhost:4200/assets/test.png',
@@ -274,7 +274,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 28,
-    name: 'Corso Magella-\nno',
+    name: 'Corso Magellano',
     type: 'regular',
     regularData: {
       color: '#e5791e',
@@ -340,7 +340,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 36,
-    name: 'Imprevis-\nti',
+    name: 'Imprevisti',
     type: 'special',
     specialData: {
       imageUrl: 'http://localhost:4200/assets/test.png',
@@ -360,7 +360,7 @@ export const fakeTiles: TileInfo[] = [
   },
   {
     id: 38,
-    name: 'Corso Magella-\nno',
+    name: 'Corso Magellano',
     type: 'regular',
     regularData: {
       color: '#e5791e',
