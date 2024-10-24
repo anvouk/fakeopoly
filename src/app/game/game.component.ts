@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Konva from 'konva';
 import { BoardTile, OnTileRightClick } from './fakeopoly/board-tile';
-import { fakePlayerPins, fakeTiles } from './fakeopoly/fake-data';
-import { Player } from "./fakeopoly/player";
-import { PlayerPin } from "./fakeopoly/player-pin";
-import gameService from "../services/game.service";
-import gameStateService from "../services/game-state.service";
-import { TileInfoModalComponent } from './modals/tile-info-modal/tile-info-modal.component';
+import { fakePlayerPins, fakeTiles, TileType } from './fakeopoly/fake-data';
+import { Player } from './fakeopoly/player';
+import { PlayerPin } from './fakeopoly/player-pin';
+import gameService from '../services/game.service';
+import gameStateService from '../services/game-state.service';
 import { MatDialog } from '@angular/material/dialog';
+import { RegularTileInfoModalComponent } from './modals/regular-tile-info-modal/regular-tile-info-modal.component';
 
 @Component({
   selector: 'app-game',
@@ -25,17 +25,17 @@ export class GameComponent implements OnInit {
   private stage: Konva.Stage | null = null;
   private player: Player | null = null;
 
-  private readonly onTileRightClick: OnTileRightClick = tile => {
+  private readonly onTileRightClick: OnTileRightClick = (tile) => {
     console.log('on right click on tile:', tile.tileInfo.name);
     this.showPopup(tile);
-  }
+  };
 
   selectedBoardTile: BoardTile | null = null;
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
   ) {}
 
   private async setupCanvas(gameId: string) {
@@ -75,14 +75,16 @@ export class GameComponent implements OnInit {
     let tiles: BoardTile[] = [];
     let i = 0;
 
-    const cornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i], (tile) => this.onTileRightClick(tile));
+    const cornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i], (tile) =>
+      this.onTileRightClick(tile),
+    );
     layer.add(cornerBottomLeft.root);
     tiles.push(cornerBottomLeft);
     ++i;
 
     // LEFT
     for (; i < fakeTiles.length; ++i) {
-      if (fakeTiles[i].type === 'corner') {
+      if (fakeTiles[i].type === TileType.Corner) {
         break;
       }
       const tile = new BoardTile(
@@ -90,47 +92,53 @@ export class GameComponent implements OnInit {
         GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT - BoardTile.WIDTH - ((i - 1) % 9) * BoardTile.WIDTH,
         90,
         fakeTiles[i],
-        (tile) => this.onTileRightClick(tile)
+        (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
       tiles.push(tile);
     }
 
-    const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i], (tile) => this.onTileRightClick(tile));
+    const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i], (tile) =>
+      this.onTileRightClick(tile),
+    );
     layer.add(cornerLeft.root);
     tiles.push(cornerLeft);
     ++i;
 
     // UP
     for (; i < fakeTiles.length; ++i) {
-      if (fakeTiles[i].type === 'corner') {
+      if (fakeTiles[i].type === TileType.Corner) {
         break;
       }
       const tile = new BoardTile(
         BoardTile.CORNER_WIDTH + BoardTile.WIDTH + ((i - 2) % 9) * BoardTile.WIDTH,
         BoardTile.HEIGHT,
         180,
-        fakeTiles[i], (tile) => this.onTileRightClick(tile)
+        fakeTiles[i],
+        (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
       tiles.push(tile);
     }
 
-    const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i], (tile) => this.onTileRightClick(tile));
+    const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i], (tile) =>
+      this.onTileRightClick(tile),
+    );
     layer.add(cornerRight.root);
     tiles.push(cornerRight);
     ++i;
 
     // RIGHT
     for (; i < fakeTiles.length; ++i) {
-      if (fakeTiles[i].type === 'corner') {
+      if (fakeTiles[i].type === TileType.Corner) {
         break;
       }
       const tile = new BoardTile(
         GameComponent.WIDTH - BoardTile.HEIGHT,
         BoardTile.CORNER_HEIGHT + BoardTile.WIDTH + ((i - 3) % 9) * BoardTile.WIDTH,
         270,
-        fakeTiles[i], (tile) => this.onTileRightClick(tile)
+        fakeTiles[i],
+        (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
       tiles.push(tile);
@@ -140,7 +148,8 @@ export class GameComponent implements OnInit {
       GameComponent.HEIGHT - BoardTile.CORNER_WIDTH,
       GameComponent.WIDTH,
       270,
-      fakeTiles[i], (tile) => this.onTileRightClick(tile)
+      fakeTiles[i],
+      (tile) => this.onTileRightClick(tile),
     );
     layer.add(cornerBottomRight.root);
     tiles.push(cornerBottomRight);
@@ -148,14 +157,15 @@ export class GameComponent implements OnInit {
 
     // BOTTOM
     for (; i < fakeTiles.length; ++i) {
-      if (fakeTiles[i].type === 'corner') {
+      if (fakeTiles[i].type === TileType.Corner) {
         break;
       }
       const tile = new BoardTile(
         GameComponent.WIDTH - BoardTile.CORNER_WIDTH - BoardTile.WIDTH - ((i - 4) % 9) * BoardTile.WIDTH,
         GameComponent.HEIGHT - BoardTile.HEIGHT,
         0,
-        fakeTiles[i], (tile) => this.onTileRightClick(tile)
+        fakeTiles[i],
+        (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
       tiles.push(tile);
@@ -178,11 +188,7 @@ export class GameComponent implements OnInit {
     this.stage.add(layer);
     layer.draw();
 
-    gameStateService.setup(
-      game,
-      this.player,
-      tiles,
-    );
+    gameStateService.setup(game, this.player, tiles);
   }
 
   private setupContextMenu() {
@@ -196,9 +202,13 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      this.dialog.open(TileInfoModalComponent, {
-        data: this.selectedBoardTile.tileInfo,
-      });
+      if (this.selectedBoardTile.tileInfo.type === TileType.Regular) {
+        this.dialog.open(RegularTileInfoModalComponent, {
+          data: this.selectedBoardTile.tileInfo,
+        });
+      } else {
+        console.log('tile info not yet implemented for this type');
+      }
     });
 
     document.getElementById('move-here')!.addEventListener('click', () => {
@@ -244,12 +254,13 @@ export class GameComponent implements OnInit {
 
     // TODO: fix scaling on higher res displays
     let yPos = containerRect.top + this.stage!.getPointerPosition()!.y + 20 + window.scrollY;
-    if (yPos + 300 > (window.outerHeight + window.scrollY)) {
+    if (yPos + 300 > window.outerHeight + window.scrollY) {
       yPos -= 180;
     }
 
     document.getElementById('context-menu')!.style.top = yPos + 'px';
-    document.getElementById('context-menu')!.style.left = containerRect.left + this.stage!.getPointerPosition()!.x + 20 + 'px';
+    document.getElementById('context-menu')!.style.left =
+      containerRect.left + this.stage!.getPointerPosition()!.x + 20 + 'px';
   }
 
   async ngOnInit(): Promise<void> {

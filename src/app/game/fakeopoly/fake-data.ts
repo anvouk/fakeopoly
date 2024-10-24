@@ -6,6 +6,7 @@ export interface BaseTileInfo {
 export enum TileType {
   Regular = 'Regular',
   Special = 'Special',
+  Corner = 'Corner',
 }
 
 export interface TileRegularInfo extends BaseTileInfo {
@@ -16,14 +17,7 @@ export interface TileRegularInfo extends BaseTileInfo {
     houseCost: number;
     hotelCost: number;
     mortgageCost: number;
-    rents: {
-      0: number;
-      1: number;
-      2: number;
-      3: number;
-      4: number;
-      5: number;
-    }
+    rents: number[];
   };
 }
 
@@ -48,12 +42,7 @@ export interface TileStationInfo extends TileSpecialInfo {
   specialType: SpecialType.Station;
   stationData: {
     mortgageCost: number;
-    rents: {
-      1: number;
-      2: number;
-      3: number;
-      4: number;
-    }
+    rents: number[];
   };
 }
 
@@ -61,10 +50,7 @@ export interface TileCompanyInfo extends TileSpecialInfo {
   specialType: SpecialType.Company;
   companyData: {
     mortgageCost: number;
-    rentsMultiplier: {
-      1: number;
-      2: number;
-    }
+    rentsMultiplier: number[];
   };
 }
 
@@ -84,14 +70,14 @@ export interface TileTaxInfo extends TileSpecialInfo {
 }
 
 export interface TileCornerInfo extends BaseTileInfo {
-  type: 'corner';
+  type: TileType.Corner;
   cornerData: {
     imageUrl: string;
   };
 }
 
 export type TileInfo =
-  TileRegularInfo
+  | TileRegularInfo
   | TileStationInfo
   | TileCompanyInfo
   | TileProbabilityInfo
@@ -103,7 +89,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 0,
     name: 'Start',
-    type: 'corner',
+    type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner.png',
     },
@@ -117,19 +103,12 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 30,
-      rents: {
-        0: 2,
-        1: 10,
-        2: 30,
-        3: 90,
-        4: 160,
-        5: 250,
-      },
+      rents: [2, 10, 30, 90, 160, 250],
     },
   },
   {
     id: 2,
-    name: 'Probabilita\'',
+    name: "Probabilita'",
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
@@ -147,14 +126,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 30,
-      rents: {
-        0: 4,
-        1: 20,
-        2: 60,
-        3: 180,
-        4: 320,
-        5: 450,
-      },
+      rents: [4, 20, 60, 180, 320, 450],
     },
   },
   {
@@ -183,12 +155,7 @@ export const fakeTiles: TileInfo[] = [
     },
     stationData: {
       mortgageCost: 100,
-      rents: {
-        1: 25,
-        2: 50,
-        3: 100,
-        4: 200,
-      },
+      rents: [25, 50, 100, 200],
     },
   },
   {
@@ -200,14 +167,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 50,
-      rents: {
-        0: 6,
-        1: 30,
-        2: 90,
-        3: 270,
-        4: 400,
-        5: 550,
-      },
+      rents: [6, 30, 90, 270, 400, 550],
     },
   },
   {
@@ -230,14 +190,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 50,
-      rents: {
-        0: 6,
-        1: 30,
-        2: 90,
-        3: 270,
-        4: 400,
-        5: 550,
-      },
+      rents: [6, 30, 90, 270, 400, 550],
     },
   },
   {
@@ -249,20 +202,13 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 60,
-      rents: {
-        0: 8,
-        1: 40,
-        2: 100,
-        3: 300,
-        4: 450,
-        5: 600,
-      },
+      rents: [8, 40, 100, 300, 450, 600],
     },
   },
   {
     id: 10,
     name: 'Transito/Prigione',
-    type: 'corner',
+    type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner.png',
     },
@@ -276,19 +222,12 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 70,
-      rents: {
-        0: 10,
-        1: 50,
-        2: 150,
-        3: 450,
-        4: 625,
-        5: 750,
-      },
+      rents: [10, 50, 150, 450, 625, 750],
     },
   },
   {
     id: 12,
-    name: 'Societa\' Elettrica',
+    name: "Societa' Elettrica",
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
@@ -298,10 +237,7 @@ export const fakeTiles: TileInfo[] = [
     },
     companyData: {
       mortgageCost: 75,
-      rentsMultiplier: {
-        1: 4,
-        2: 10,
-      },
+      rentsMultiplier: [4, 10],
     },
   },
   {
@@ -313,14 +249,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 70,
-      rents: {
-        0: 10,
-        1: 50,
-        2: 150,
-        3: 450,
-        4: 625,
-        5: 750,
-      },
+      rents: [10, 50, 150, 450, 625, 750],
     },
   },
   {
@@ -332,14 +261,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 80,
-      rents: {
-        0: 12,
-        1: 60,
-        2: 180,
-        3: 500,
-        4: 700,
-        5: 900,
-      },
+      rents: [12, 60, 180, 500, 700, 900],
     },
   },
   {
@@ -354,12 +276,7 @@ export const fakeTiles: TileInfo[] = [
     },
     stationData: {
       mortgageCost: 100,
-      rents: {
-        1: 25,
-        2: 50,
-        3: 100,
-        4: 200,
-      },
+      rents: [25, 50, 100, 200],
     },
   },
   {
@@ -371,19 +288,12 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 90,
-      rents: {
-        0: 14,
-        1: 70,
-        2: 200,
-        3: 550,
-        4: 750,
-        5: 950,
-      },
+      rents: [14, 70, 200, 550, 750, 950],
     },
   },
   {
     id: 17,
-    name: 'Probabilita\'',
+    name: "Probabilita'",
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
@@ -401,14 +311,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 90,
-      rents: {
-        0: 14,
-        1: 70,
-        2: 200,
-        3: 550,
-        4: 750,
-        5: 950,
-      },
+      rents: [14, 70, 200, 550, 750, 950],
     },
   },
   {
@@ -420,20 +323,13 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 100,
-      rents: {
-        0: 16,
-        1: 80,
-        2: 220,
-        3: 600,
-        4: 800,
-        5: 1000,
-      },
+      rents: [16, 80, 220, 600, 800, 1000],
     },
   },
   {
     id: 20,
     name: 'Parcheggio Gratuito',
-    type: 'corner',
+    type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner.png',
     },
@@ -447,14 +343,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 110,
-      rents: {
-        0: 18,
-        1: 90,
-        2: 250,
-        3: 700,
-        4: 875,
-        5: 1050,
-      },
+      rents: [18, 90, 250, 700, 875, 1050],
     },
   },
   {
@@ -477,14 +366,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 110,
-      rents: {
-        0: 18,
-        1: 90,
-        2: 250,
-        3: 700,
-        4: 875,
-        5: 1050,
-      },
+      rents: [18, 90, 250, 700, 875, 1050],
     },
   },
   {
@@ -496,14 +378,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 120,
-      rents: {
-        0: 20,
-        1: 100,
-        2: 300,
-        3: 750,
-        4: 925,
-        5: 1100,
-      },
+      rents: [20, 100, 300, 750, 925, 1100],
     },
   },
   {
@@ -518,12 +393,7 @@ export const fakeTiles: TileInfo[] = [
     },
     stationData: {
       mortgageCost: 100,
-      rents: {
-        1: 25,
-        2: 50,
-        3: 100,
-        4: 200,
-      },
+      rents: [25, 50, 100, 200],
     },
   },
   {
@@ -535,14 +405,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 130,
-      rents: {
-        0: 22,
-        1: 110,
-        2: 330,
-        3: 800,
-        4: 975,
-        5: 1150,
-      },
+      rents: [22, 110, 330, 800, 975, 1150],
     },
   },
   {
@@ -554,19 +417,12 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 130,
-      rents: {
-        0: 22,
-        1: 110,
-        2: 330,
-        3: 800,
-        4: 975,
-        5: 1150,
-      },
+      rents: [22, 110, 330, 800, 975, 1150],
     },
   },
   {
     id: 28,
-    name: 'Societa\' Acqua Potabile',
+    name: "Societa' Acqua Potabile",
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
@@ -576,10 +432,7 @@ export const fakeTiles: TileInfo[] = [
     },
     companyData: {
       mortgageCost: 75,
-      rentsMultiplier: {
-        1: 4,
-        2: 10,
-      },
+      rentsMultiplier: [4, 10],
     },
   },
   {
@@ -591,20 +444,13 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 140,
-      rents: {
-        0: 24,
-        1: 120,
-        2: 360,
-        3: 850,
-        4: 1025,
-        5: 1200,
-      },
+      rents: [24, 120, 360, 850, 1025, 1200],
     },
   },
   {
     id: 30,
     name: 'In Prigione',
-    type: 'corner',
+    type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner.png',
     },
@@ -618,14 +464,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 150,
-      rents: {
-        0: 26,
-        1: 130,
-        2: 390,
-        3: 900,
-        4: 1100,
-        5: 1275,
-      },
+      rents: [26, 130, 390, 900, 1100, 1275],
     },
   },
   {
@@ -637,19 +476,12 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 150,
-      rents: {
-        0: 26,
-        1: 130,
-        2: 390,
-        3: 900,
-        4: 1100,
-        5: 1275,
-      },
+      rents: [26, 130, 390, 900, 1100, 1275],
     },
   },
   {
     id: 33,
-    name: 'Probabilita\'',
+    name: "Probabilita'",
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
@@ -667,14 +499,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 160,
-      rents: {
-        0: 28,
-        1: 150,
-        2: 450,
-        3: 1000,
-        4: 1200,
-        5: 1400,
-      },
+      rents: [28, 150, 450, 1000, 1200, 1400],
     },
   },
   {
@@ -689,12 +514,7 @@ export const fakeTiles: TileInfo[] = [
     },
     stationData: {
       mortgageCost: 100,
-      rents: {
-        1: 25,
-        2: 50,
-        3: 100,
-        4: 200,
-      },
+      rents: [25, 50, 100, 200],
     },
   },
   {
@@ -717,14 +537,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 175,
-      rents: {
-        0: 35,
-        1: 175,
-        2: 500,
-        3: 1100,
-        4: 1300,
-        5: 1500,
-      },
+      rents: [35, 175, 500, 1100, 1300, 1500],
     },
   },
   {
@@ -750,14 +563,7 @@ export const fakeTiles: TileInfo[] = [
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 200,
-      rents: {
-        0: 50,
-        1: 200,
-        2: 600,
-        3: 1400,
-        4: 1700,
-        5: 2000,
-      },
+      rents: [50, 200, 600, 1400, 1700, 2000],
     },
   },
 ];

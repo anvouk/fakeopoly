@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Property Info</h1>
+<div mat-dialog-content>
+  <p>Tile properties</p>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput readonly [(ngModel)]="tileInfo.name">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Mortgage</mat-label>
+      <input matInput readonly [(ngModel)]="tileInfo.regularData.mortgageCost">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>House cost</mat-label>
+      <input matInput readonly [(ngModel)]="tileInfo.regularData.houseCost">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Hotel cost</mat-label>
+      <input matInput readonly [(ngModel)]="tileInfo.regularData.hotelCost">
+    </mat-form-field>
+    <mat-table [dataSource]="housesRent">
+      <!-- Column Declarations -->
+      <ng-container matColumnDef="buy-house">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          @if (i === 0) {
+            <!-- No house -->
+          } @else if (row.buyHouse) {
+            <button mat-button mat-raised-button color="primary" (click)="sellHouse()">
+              <mat-icon class="material-symbols-outlined">close</mat-icon> Sell
+            </button>
+          } @else {
+            <button mat-button mat-raised-button color="accent" (click)="buyHouse()">
+              <mat-icon class="material-symbols-outlined">add</mat-icon> Buy
+            </button>
+          }
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="house-cost">
+        <mat-header-cell *matHeaderCellDef>House Cost</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          @if (i === 0) {
+            -
+          } @else {
+            {{ row.houseCost }}
+          }
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="rent">
+        <mat-header-cell *matHeaderCellDef>Rent</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.rent }}</mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row *matHeaderRowDef="['buy-house', 'house-cost', 'rent']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['buy-house', 'house-cost', 'rent']"></mat-row>
+    </mat-table>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="button-close-dialog" (click)="close()">Close</button>
+</div>

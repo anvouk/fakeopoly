@@ -85,7 +85,7 @@ export class BoardTile {
 
     let width = BoardTile.WIDTH;
     let height = BoardTile.HEIGHT;
-    if (tileInfo.type === 'corner') {
+    if (tileInfo.type === TileType.Corner) {
       width = BoardTile.CORNER_WIDTH;
       height = BoardTile.CORNER_HEIGHT;
     }
@@ -114,11 +114,11 @@ export class BoardTile {
     });
     this._root.add(backgroundHover);
 
-    this._root.on('mouseenter', (e) => {
+    this._root.on('mouseenter', (_) => {
       document.body.style.cursor = 'pointer';
       backgroundHover.setZIndex(3);
     });
-    this._root.on('mouseleave', (e) => {
+    this._root.on('mouseleave', (_) => {
       document.body.style.cursor = 'default';
       backgroundHover.setZIndex(0);
     });
@@ -139,7 +139,7 @@ export class BoardTile {
       case TileType.Special:
         this.constructSpecialTile(tileInfo);
         break;
-      case 'corner':
+      case TileType.Corner:
         this.constructCornerTile(tileInfo);
         break;
     }
