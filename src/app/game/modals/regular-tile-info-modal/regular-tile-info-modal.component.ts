@@ -29,7 +29,6 @@ interface HousesRent {
 
 @Component({
   selector: 'app-regular-tile-info-modal',
-  standalone: true,
   imports: [
     FormsModule,
     MatButton,

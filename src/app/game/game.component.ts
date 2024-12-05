@@ -13,7 +13,6 @@ import { RegularTileInfoModalComponent } from './modals/regular-tile-info-modal/
 
 @Component({
   selector: 'app-game',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],

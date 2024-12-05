@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-modal',
-  standalone: true,
   imports: [CommonModule, MatDialogModule, MatButtonModule, MatInputModule, FormsModule],
   templateUrl: './create-modal.component.html',
   styleUrls: ['./create-modal.component.scss']

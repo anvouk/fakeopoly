@@ -8,10 +8,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [
     CommonModule,
-    CreateModalComponent,
     MatButtonModule,
     MatDialogModule,
   ],

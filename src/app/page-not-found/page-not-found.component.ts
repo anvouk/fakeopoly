@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
-  standalone: true,
   imports: [
     MatButton,
   ],
