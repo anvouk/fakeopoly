@@ -91,7 +91,7 @@ export const fakeTiles: TileInfo[] = [
     name: 'Start',
     type: TileType.Corner,
     cornerData: {
-      imageUrl: 'http://localhost:4200/assets/corner.png',
+      imageUrl: 'http://localhost:4200/assets/corner-start.png',
     },
   },
   {
@@ -210,7 +210,7 @@ export const fakeTiles: TileInfo[] = [
     name: 'Transito/Prigione',
     type: TileType.Corner,
     cornerData: {
-      imageUrl: 'http://localhost:4200/assets/corner.png',
+      imageUrl: 'http://localhost:4200/assets/corner-prison.png',
     },
   },
   {
@@ -331,7 +331,7 @@ export const fakeTiles: TileInfo[] = [
     name: 'Parcheggio Gratuito',
     type: TileType.Corner,
     cornerData: {
-      imageUrl: 'http://localhost:4200/assets/corner.png',
+      imageUrl: 'http://localhost:4200/assets/corner-parking.png',
     },
   },
   {
@@ -452,7 +452,7 @@ export const fakeTiles: TileInfo[] = [
     name: 'In Prigione',
     type: TileType.Corner,
     cornerData: {
-      imageUrl: 'http://localhost:4200/assets/corner.png',
+      imageUrl: 'http://localhost:4200/assets/corner-go-to-jail.png',
     },
   },
   {
