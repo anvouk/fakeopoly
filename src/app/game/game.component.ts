@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Konva from 'konva';
-import { BoardTile, OnTileRightClick } from './fakeopoly/board-tile';
+import { BoardTile, OnTileLeftClick, OnTileRightClick } from './fakeopoly/board-tile';
 import { fakePlayerPins, fakeTiles, SpecialType, TileType } from './fakeopoly/fake-data';
 import { Player } from './fakeopoly/player';
 import { PlayerPin } from './fakeopoly/player-pin';
@@ -24,6 +24,39 @@ export class GameComponent implements OnInit {
 
   private stage: Konva.Stage | null = null;
   private player: Player | null = null;
+
+  private readonly onTileLeftClick: OnTileLeftClick = (tile) => {
+    console.log('on left click on tile:', tile.tileInfo.name);
+    switch (tile.tileInfo.type) {
+      case TileType.Regular:
+        this.dialog.open(RegularTileInfoModalComponent, {
+          data: tile.tileInfo,
+        });
+        break;
+      case TileType.Special:
+        switch (tile.tileInfo.specialType) {
+          case SpecialType.Station:
+            this.dialog.open(StationsTileInfoModalComponent, {
+              data: tile.tileInfo,
+            });
+            break;
+          case SpecialType.Company:
+          case SpecialType.Probability:
+          case SpecialType.Chance:
+          case SpecialType.Tax:
+          default:
+            // there is no context menu for these.
+            break;
+        }
+        break;
+      case TileType.Corner:
+        // there is no context menu for corner tiles.
+        break;
+      default:
+        console.error('unknown tile type');
+        break;
+    }
+  };
 
   private readonly onTileRightClick: OnTileRightClick = (tile) => {
     console.log('on right click on tile:', tile.tileInfo.name);
@@ -75,8 +108,9 @@ export class GameComponent implements OnInit {
     let tiles: BoardTile[] = [];
     let i = 0;
 
-    const cornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i], (tile) =>
-      this.onTileRightClick(tile),
+    const cornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i],
+      null,
+      (tile) => this.onTileRightClick(tile),
     );
     layer.add(cornerBottomLeft.root);
     tiles.push(cornerBottomLeft);
@@ -92,14 +126,16 @@ export class GameComponent implements OnInit {
         GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT - BoardTile.WIDTH - ((i - 1) % 9) * BoardTile.WIDTH,
         90,
         fakeTiles[i],
+        (tile) => this.onTileLeftClick(tile),
         (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
       tiles.push(tile);
     }
 
-    const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i], (tile) =>
-      this.onTileRightClick(tile),
+    const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i],
+      null,
+      (tile) => this.onTileRightClick(tile),
     );
     layer.add(cornerLeft.root);
     tiles.push(cornerLeft);
@@ -115,14 +151,16 @@ export class GameComponent implements OnInit {
         BoardTile.HEIGHT,
         180,
         fakeTiles[i],
+        (tile) => this.onTileLeftClick(tile),
         (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
       tiles.push(tile);
     }
 
-    const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i], (tile) =>
-      this.onTileRightClick(tile),
+    const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i],
+      null,
+      (tile) => this.onTileRightClick(tile),
     );
     layer.add(cornerRight.root);
     tiles.push(cornerRight);
@@ -138,6 +176,7 @@ export class GameComponent implements OnInit {
         BoardTile.CORNER_HEIGHT + BoardTile.WIDTH + ((i - 3) % 9) * BoardTile.WIDTH,
         270,
         fakeTiles[i],
+        (tile) => this.onTileLeftClick(tile),
         (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
@@ -149,6 +188,7 @@ export class GameComponent implements OnInit {
       GameComponent.WIDTH,
       270,
       fakeTiles[i],
+      null,
       (tile) => this.onTileRightClick(tile),
     );
     layer.add(cornerBottomRight.root);
@@ -165,6 +205,7 @@ export class GameComponent implements OnInit {
         GameComponent.HEIGHT - BoardTile.HEIGHT,
         0,
         fakeTiles[i],
+        (tile) => this.onTileLeftClick(tile),
         (tile) => this.onTileRightClick(tile),
       );
       layer.add(tile.root);
@@ -172,10 +213,6 @@ export class GameComponent implements OnInit {
     }
 
     console.log('end map draw');
-
-    // circle.on('pointerclick', function () {
-    //   console.log('Mouseup circle');
-    // });
 
     // player setup
     this.player = new Player(
@@ -195,42 +232,6 @@ export class GameComponent implements OnInit {
     window.addEventListener('click', () => {
       // hide menu
       document.getElementById('context-menu')!.style.display = 'none';
-    });
-
-    document.getElementById('tile-info')!.addEventListener('click', async () => {
-      if (this.selectedBoardTile == null) {
-        return;
-      }
-
-      switch (this.selectedBoardTile.tileInfo.type) {
-        case TileType.Regular:
-          this.dialog.open(RegularTileInfoModalComponent, {
-            data: this.selectedBoardTile.tileInfo,
-          });
-          break;
-        case TileType.Special:
-          switch (this.selectedBoardTile.tileInfo.specialType) {
-            case SpecialType.Station:
-              this.dialog.open(StationsTileInfoModalComponent, {
-                data: this.selectedBoardTile.tileInfo,
-              });
-              break;
-            case SpecialType.Company:
-            case SpecialType.Probability:
-            case SpecialType.Chance:
-            case SpecialType.Tax:
-            default:
-              // there is no context menu for these.
-              break;
-          }
-          break;
-        case TileType.Corner:
-          // there is no context menu for corner tiles.
-          break;
-        default:
-          console.error('unknown tile type');
-          break;
-      }
     });
 
     document.getElementById('move-here')!.addEventListener('click', () => {

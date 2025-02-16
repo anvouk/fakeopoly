@@ -1,6 +1,7 @@
 export interface BaseTileInfo {
   id: number;
   name: string;
+  leftClickable: boolean;
 }
 
 export enum TileType {
@@ -89,6 +90,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 0,
     name: 'Start',
+    leftClickable: false,
     type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner-start.png',
@@ -97,6 +99,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 1,
     name: 'Corso Vercelli',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#603d2e',
@@ -109,6 +112,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 2,
     name: "Probabilita'",
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
@@ -120,6 +124,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 3,
     name: 'Corso Venezia',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#603d2e',
@@ -132,6 +137,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 4,
     name: 'Tassa Patrimoniale',
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Tax,
     specialData: {
@@ -146,6 +152,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 5,
     name: 'Stazione Lingotto',
+    leftClickable: true,
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -161,6 +168,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 6,
     name: 'Corso Luigi Settembrini',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#d6e6f4',
@@ -173,6 +181,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 7,
     name: 'Imprevisti',
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Chance,
     specialData: {
@@ -184,6 +193,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 8,
     name: 'Corso Orbassano',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#d6e6f4',
@@ -196,6 +206,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 9,
     name: 'Corso Cosenza',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#d6e6f4',
@@ -208,6 +219,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 10,
     name: 'Transito/Prigione',
+    leftClickable: false,
     type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner-prison.png',
@@ -216,6 +228,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 11,
     name: 'Via Zino Zini',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#db2f88',
@@ -228,6 +241,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 12,
     name: "Societa' Elettrica",
+    leftClickable: true,
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
@@ -243,6 +257,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 13,
     name: 'Via Nizza',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#db2f88',
@@ -255,6 +270,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 14,
     name: 'Corso Moncalieri',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#db2f88',
@@ -267,6 +283,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 15,
     name: 'Stazione Sito',
+    leftClickable: true,
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -282,6 +299,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 16,
     name: 'Corso Grosseto',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#f09100',
@@ -294,6 +312,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 17,
     name: "Probabilita'",
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
@@ -305,6 +324,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 18,
     name: 'Corso Potenza',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#f09100',
@@ -317,6 +337,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 19,
     name: 'Piazza Giuseppe Manno',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#f09100',
@@ -329,6 +350,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 20,
     name: 'Parcheggio Gratuito',
+    leftClickable: false,
     type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner-parking.png',
@@ -337,6 +359,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 21,
     name: 'Via Cernaia',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#e8001e',
@@ -349,6 +372,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 22,
     name: 'Imprevisti',
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Chance,
     specialData: {
@@ -360,6 +384,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 23,
     name: 'Corso Galileo Ferraris',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#e8001e',
@@ -372,6 +397,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 24,
     name: 'Corso Vittorio Emanuele II',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#e8001e',
@@ -384,6 +410,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 25,
     name: 'Stazione Porta Nuova',
+    leftClickable: true,
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -399,6 +426,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 26,
     name: 'Corso Stati Uniti',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#fde002',
@@ -411,6 +439,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 27,
     name: 'Corso Traiano',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#fde002',
@@ -423,6 +452,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 28,
     name: "Societa' Acqua Potabile",
+    leftClickable: true,
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
@@ -438,6 +468,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 29,
     name: 'Piazza Castello',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#fde002',
@@ -450,6 +481,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 30,
     name: 'In Prigione',
+    leftClickable: false,
     type: TileType.Corner,
     cornerData: {
       imageUrl: 'http://localhost:4200/assets/corner-go-to-jail.png',
@@ -458,6 +490,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 31,
     name: 'Via Roma',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#00b94a',
@@ -470,6 +503,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 32,
     name: 'Corso Siracusa',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#00b94a',
@@ -482,6 +516,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 33,
     name: "Probabilita'",
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
@@ -493,6 +528,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 34,
     name: 'Via Guido Reni',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#00b94a',
@@ -505,6 +541,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 35,
     name: 'Stazione Porta Susa',
+    leftClickable: true,
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -520,6 +557,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 36,
     name: 'Imprevisti',
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Chance,
     specialData: {
@@ -531,6 +569,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 37,
     name: 'Corso Principe Oddone',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#006cc6',
@@ -543,6 +582,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 38,
     name: 'Tassa Di Lusso',
+    leftClickable: false,
     type: TileType.Special,
     specialType: SpecialType.Tax,
     specialData: {
@@ -557,6 +597,7 @@ export const fakeTiles: TileInfo[] = [
   {
     id: 39,
     name: 'Parco San Vito',
+    leftClickable: true,
     type: TileType.Regular,
     regularData: {
       color: '#006cc6',

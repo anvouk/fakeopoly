@@ -1,6 +1,7 @@
 import Konva from 'konva';
 import { TileCornerInfo, TileInfo, TileRegularInfo, TileSpecialInfo, TileType } from './fake-data';
 
+export type OnTileLeftClick = (tile: BoardTile) => void;
 export type OnTileRightClick = (tile: BoardTile) => void;
 
 export class BoardTile {
@@ -80,7 +81,9 @@ export class BoardTile {
     this._root.add(backgroundImage);
   }
 
-  constructor(x: number, y: number, rot: number, tileInfo: TileInfo, onRightClick: OnTileRightClick) {
+  constructor(x: number, y: number, rot: number, tileInfo: TileInfo,
+              onLeftClick: OnTileLeftClick | null = null,
+              onRightClick: OnTileRightClick | null = null) {
     this._tileInfo = tileInfo;
 
     let width = BoardTile.WIDTH;
@@ -98,29 +101,42 @@ export class BoardTile {
       height: height,
     });
 
-    this._root.on('contextmenu', (e) => {
-      e.evt.preventDefault();
-      onRightClick(this);
-    });
+    if (tileInfo.leftClickable && onLeftClick != null) {
+      this._root.on('mouseup', (e) => {
+        // only on left click
+        if (e.evt.button === 0) {
+          e.evt.preventDefault();
+          onLeftClick(this);
+        }
+      });
+    }
+    if (onRightClick != null) {
+      this._root.on('contextmenu', (e) => {
+        e.evt.preventDefault();
+        onRightClick(this);
+      });
+    }
 
-    // tile hover overlay setup
-    const backgroundHover = new Konva.Rect({
-      width: width,
-      height: height,
-      stroke: '#000000',
-      strokeWidth: 2,
-      fill: 'rgba(255,255,255,0.2)',
-    });
-    this._root.add(backgroundHover);
+    // tile hover overlay setup for clickable tiles only
+    if (tileInfo.leftClickable && onLeftClick != null) {
+      const backgroundHover = new Konva.Rect({
+        width: width,
+        height: height,
+        stroke: '#000000',
+        strokeWidth: 2,
+        fill: 'rgba(255,255,255,0.2)',
+      });
+      this._root.add(backgroundHover);
 
-    this._root.on('mouseenter', (_) => {
-      document.body.style.cursor = 'pointer';
-      backgroundHover.setZIndex(2);
-    });
-    this._root.on('mouseleave', (_) => {
-      document.body.style.cursor = 'default';
-      backgroundHover.setZIndex(0);
-    });
+      this._root.on('mouseenter', (_) => {
+        document.body.style.cursor = 'pointer';
+        backgroundHover.setZIndex(2);
+      });
+      this._root.on('mouseleave', (_) => {
+        document.body.style.cursor = 'default';
+        backgroundHover.setZIndex(0);
+      });
+    }
 
     const background = new Konva.Rect({
       width: width,
