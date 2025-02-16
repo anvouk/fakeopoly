@@ -112,7 +112,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/chest.png',
       width: 64,
       height: 64,
     },
@@ -135,7 +135,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Tax,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/super-tax.png',
       width: 64,
       height: 64,
     },
@@ -149,7 +149,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/train-station.png',
       width: 64,
       height: 64,
     },
@@ -176,7 +176,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Chance,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/chance.png',
       width: 64,
       height: 64,
     },
@@ -270,7 +270,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/train-station.png',
       width: 64,
       height: 64,
     },
@@ -297,7 +297,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/chest.png',
       width: 64,
       height: 64,
     },
@@ -352,7 +352,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Chance,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/chance.png',
       width: 64,
       height: 64,
     },
@@ -387,7 +387,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/train-station.png',
       width: 64,
       height: 64,
     },
@@ -485,7 +485,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Probability,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/chest.png',
       width: 64,
       height: 64,
     },
@@ -508,7 +508,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/train-station.png',
       width: 64,
       height: 64,
     },
@@ -523,7 +523,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Chance,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/chance.png',
       width: 64,
       height: 64,
     },
@@ -546,7 +546,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Tax,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/super-tax.png',
       width: 64,
       height: 64,
     },
@@ -576,6 +576,6 @@ export interface PlayerPinInfo {
 export const fakePlayerPins: PlayerPinInfo[] = [
   {
     name: 'demo',
-    imageUrl: 'http://localhost:4200/assets/player.png',
+    imageUrl: 'http://localhost:4200/assets/player-1.png',
   },
 ];
