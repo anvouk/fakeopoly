@@ -58,7 +58,7 @@ export class BoardTile {
 
     const text = new Konva.Text({
       text: tileInfo.name.replaceAll(' ', '\n'),
-      x: BoardTile.WIDTH / 2 - BoardTile.WIDTH / 3,
+      x: BoardTile.WIDTH / 10,
       y: 20,
       fontSize: 16,
       fontFamily: 'Calibri',
@@ -109,14 +109,13 @@ export class BoardTile {
       height: height,
       stroke: '#000000',
       strokeWidth: 2,
-      fill: '#ffffff',
-      opacity: 0.15,
+      fill: 'rgba(255,255,255,0.2)',
     });
     this._root.add(backgroundHover);
 
     this._root.on('mouseenter', (_) => {
       document.body.style.cursor = 'pointer';
-      backgroundHover.setZIndex(3);
+      backgroundHover.setZIndex(2);
     });
     this._root.on('mouseleave', (_) => {
       document.body.style.cursor = 'default';

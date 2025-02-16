@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^19.0.3",
     "@angular/platform-browser-dynamic": "^19.0.3",
     "@angular/router": "^19.0.3",
-    "konva": "^9.3.16",
+    "konva": "^9.3.18",
     "material-icons": "^1.13.12",
     "pouchdb-browser": "^9.0.0",
     "rxjs": "^7.8.1",
