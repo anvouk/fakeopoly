@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Station Info</h1>
+<div mat-dialog-content class="dialog">
+  <p>Station properties</p>
+  <div>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput readonly [(ngModel)]="tileInfo.name">
+    </mat-form-field>
+    <br>
+    <mat-table [dataSource]="tileInfo.stationData.rents">
+      <!-- Column Declarations -->
+      <ng-container matColumnDef="stations-count">
+        <mat-header-cell *matHeaderCellDef>Stations in possession</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="rent">
+        <mat-header-cell *matHeaderCellDef>Rent</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row }}</mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row *matHeaderRowDef="['stations-count', 'rent']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['stations-count', 'rent']"></mat-row>
+    </mat-table>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="button-close-dialog" (click)="close()">Close</button>
+</div>

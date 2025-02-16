@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Konva from 'konva';
 import { BoardTile, OnTileRightClick } from './fakeopoly/board-tile';
-import { fakePlayerPins, fakeTiles, TileType } from './fakeopoly/fake-data';
+import { fakePlayerPins, fakeTiles, SpecialType, TileType } from './fakeopoly/fake-data';
 import { Player } from './fakeopoly/player';
 import { PlayerPin } from './fakeopoly/player-pin';
 import gameService from '../services/game.service';
 import gameStateService from '../services/game-state.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RegularTileInfoModalComponent } from './modals/regular-tile-info-modal/regular-tile-info-modal.component';
+import { StationsTileInfoModalComponent } from './modals/stations-tile-info-modal/stations-tile-info-modal.component';
 
 @Component({
   selector: 'app-game',
@@ -201,12 +202,34 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      if (this.selectedBoardTile.tileInfo.type === TileType.Regular) {
-        this.dialog.open(RegularTileInfoModalComponent, {
-          data: this.selectedBoardTile.tileInfo,
-        });
-      } else {
-        console.log('tile info not yet implemented for this type');
+      switch (this.selectedBoardTile.tileInfo.type) {
+        case TileType.Regular:
+          this.dialog.open(RegularTileInfoModalComponent, {
+            data: this.selectedBoardTile.tileInfo,
+          });
+          break;
+        case TileType.Special:
+          switch (this.selectedBoardTile.tileInfo.specialType) {
+            case SpecialType.Station:
+              this.dialog.open(StationsTileInfoModalComponent, {
+                data: this.selectedBoardTile.tileInfo,
+              });
+              break;
+            case SpecialType.Company:
+            case SpecialType.Probability:
+            case SpecialType.Chance:
+            case SpecialType.Tax:
+            default:
+              // there is no context menu for these.
+              break;
+          }
+          break;
+        case TileType.Corner:
+          // there is no context menu for corner tiles.
+          break;
+        default:
+          console.error('unknown tile type');
+          break;
       }
     });
 

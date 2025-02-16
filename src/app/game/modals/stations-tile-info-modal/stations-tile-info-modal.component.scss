@@ -1,6 +1,14 @@
+.dialog {
+  min-width: 30rem;
+}
+
 h1 {
   padding-bottom: 1rem;
   text-align: center;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .button-close-dialog {
@@ -14,14 +22,9 @@ table {
   width: 100%;
 }
 
-.mat-column-buy-house,
-.mat-column-house-cost,
+.mat-column-stations-count,
 .mat-column-rent {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  button {
-    padding: 0 0.8rem;
-  }
 }
