@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Station Info</h1>
+<h1 mat-dialog-title>Company Info</h1>
 <div mat-dialog-content class="dialog">
-  <p>Station properties</p>
+  <p>Company properties</p>
   <div>
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Name</mat-label>
@@ -9,22 +9,22 @@
     <br>
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Mortgage</mat-label>
-      <input matInput readonly [(ngModel)]="tileInfo.stationData.mortgageCost">
+      <input matInput readonly [(ngModel)]="tileInfo.companyData.mortgageCost">
     </mat-form-field>
-    <mat-table [dataSource]="tileInfo.stationData.rents">
+    <mat-table [dataSource]="tileInfo.companyData.rentsMultiplier">
       <!-- Column Declarations -->
-      <ng-container matColumnDef="stations-count">
-        <mat-header-cell *matHeaderCellDef>Stations in possession</mat-header-cell>
+      <ng-container matColumnDef="companies-count">
+        <mat-header-cell *matHeaderCellDef>Companies in possession</mat-header-cell>
         <mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="rent">
-        <mat-header-cell *matHeaderCellDef>Rent</mat-header-cell>
+      <ng-container matColumnDef="rent-multiplier">
+        <mat-header-cell *matHeaderCellDef>Rent multiplier</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row }}</mat-cell>
       </ng-container>
 
       <!-- Header and Row Declarations -->
-      <mat-header-row *matHeaderRowDef="['stations-count', 'rent']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['stations-count', 'rent']"></mat-row>
+      <mat-header-row *matHeaderRowDef="['companies-count', 'rent-multiplier']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['companies-count', 'rent-multiplier']"></mat-row>
     </mat-table>
   </div>
 </div>

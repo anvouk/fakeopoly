@@ -11,6 +11,7 @@ import gameStateService from '../services/game-state.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RegularTileInfoModalComponent } from './modals/regular-tile-info-modal/regular-tile-info-modal.component';
 import { StationsTileInfoModalComponent } from './modals/stations-tile-info-modal/stations-tile-info-modal.component';
+import { CompanyTileInfoModalComponent } from './modals/company-tile-info-modal/company-tile-info-modal.component';
 
 @Component({
   selector: 'app-game',
@@ -41,6 +42,10 @@ export class GameComponent implements OnInit {
             });
             break;
           case SpecialType.Company:
+            this.dialog.open(CompanyTileInfoModalComponent, {
+              data: tile.tileInfo,
+            });
+            break;
           case SpecialType.Probability:
           case SpecialType.Chance:
           case SpecialType.Tax:
