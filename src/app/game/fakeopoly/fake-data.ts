@@ -245,7 +245,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/society-electricity.png',
       width: 64,
       height: 64,
     },
@@ -456,7 +456,7 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
-      imageUrl: 'http://localhost:4200/assets/test.png',
+      imageUrl: 'http://localhost:4200/assets/society-water.png',
       width: 64,
       height: 64,
     },
