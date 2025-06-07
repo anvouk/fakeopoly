@@ -1,0 +1,35 @@
+<div class="root">
+<!--  <button mat-button (click)="this.gameLogService.postNotice({title:'Welcome to fakeopoly', msg:'Have you read the guide?'})">Add with title</button>-->
+<!--  <button mat-button (click)="this.gameLogService.postNotice({msg:'Test title', expirySecs:5})">Add</button>-->
+<!--  <button mat-button (click)="this.gameLogService.postInteraction({msg:'Test title', expirySecs:5, closeButtonText:'Ignore',interactButtonText:'Show me'})">Add interaction</button>-->
+  @for (msg of gameLogService.messages(); track msg.id) {
+    <div class="log-entry-container">
+      <!-- double mat-card here to allow changing card background opacity while keeping a solid color underneath -->
+      <mat-card>
+        <mat-card appearance="outlined" [ngClass]="{'card-interaction': msg.content.logType === GameLogType.Interaction, 'card-notice': msg.content.logType === GameLogType.Notice}">
+          @if (msg.content.title != null) {
+            <div class="log-entry-title">
+              {{ msg.content.title }}
+            </div>
+          }
+          <div class="log-entry-text">
+            {{ msg.content.message }}
+          </div>
+
+          <div class="buttons-container">
+            @if (msg.content.logType === GameLogType.Interaction) {
+              <button mat-button>{{ msg.content.displayData.interactButtonText }}</button>
+            }
+            <button mat-button (click)="this.gameLogService.closeNotification(msg);">
+              {{ msg.content.displayData.closeButtonText }}
+            </button>
+          </div>
+
+          @if (msg.expiry != null) {
+            <mat-progress-bar [value]="msg.expiry.progressBarVal()"></mat-progress-bar>
+          }
+        </mat-card>
+      </mat-card>
+    </div>
+  }
+</div>

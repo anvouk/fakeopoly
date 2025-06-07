@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RegularTileInfoModalComponent } from './modals/regular-tile-info-modal/regular-tile-info-modal.component';
 import { StationsTileInfoModalComponent } from './modals/stations-tile-info-modal/stations-tile-info-modal.component';
 import { CompanyTileInfoModalComponent } from './modals/company-tile-info-modal/company-tile-info-modal.component';
+import { GameLogService } from '../services/game-log.service';
 
 @Component({
   selector: 'app-game',
@@ -74,6 +75,7 @@ export class GameComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly dialog: MatDialog,
+    private readonly gameLogService: GameLogService,
   ) {}
 
   private async setupCanvas(gameId: string) {
@@ -113,7 +115,11 @@ export class GameComponent implements OnInit {
     let tiles: BoardTile[] = [];
     let i = 0;
 
-    const cornerBottomLeft = new BoardTile(0, GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT, 0, fakeTiles[i],
+    const cornerBottomLeft = new BoardTile(
+      0,
+      GameComponent.HEIGHT - BoardTile.CORNER_HEIGHT,
+      0,
+      fakeTiles[i],
       null,
       (tile) => this.onTileRightClick(tile),
     );
@@ -138,9 +144,8 @@ export class GameComponent implements OnInit {
       tiles.push(tile);
     }
 
-    const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i],
-      null,
-      (tile) => this.onTileRightClick(tile),
+    const cornerLeft = new BoardTile(BoardTile.CORNER_HEIGHT, 0, 90, fakeTiles[i], null, (tile) =>
+      this.onTileRightClick(tile),
     );
     layer.add(cornerLeft.root);
     tiles.push(cornerLeft);
@@ -163,9 +168,8 @@ export class GameComponent implements OnInit {
       tiles.push(tile);
     }
 
-    const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i],
-      null,
-      (tile) => this.onTileRightClick(tile),
+    const cornerRight = new BoardTile(GameComponent.HEIGHT, BoardTile.CORNER_WIDTH, 180, fakeTiles[i], null, (tile) =>
+      this.onTileRightClick(tile),
     );
     layer.add(cornerRight.root);
     tiles.push(cornerRight);
@@ -293,6 +297,13 @@ export class GameComponent implements OnInit {
   }
 
   private async beginGame() {
+    setTimeout(() => {
+      this.gameLogService.postNotice({
+        title: 'Welcome to fakeopoly',
+        msg: 'This is still a work in progress. Please be mindful and have fun :)',
+        closeButtonText: 'Got It'
+      });
+    }, 2000);
   }
 
   async ngOnInit(): Promise<void> {

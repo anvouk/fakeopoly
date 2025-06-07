@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ServiceLogComponent } from './service-log/service-log.component';
+import { GameLogComponent } from './game-log/game-log.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterModule, ServiceLogComponent],
+  imports: [CommonModule, RouterModule, GameLogComponent],
   providers: [],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
