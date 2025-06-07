@@ -268,8 +268,9 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      await gameStateService.turnLoop(() => {
+      await gameStateService.turnLoop(async () => {
         console.log(`player endend on tile: ${JSON.stringify(this.player!.tile.tileInfo)}`);
+        await gameStateService.advanceTurn();
       });
     });
   }
@@ -291,6 +292,9 @@ export class GameComponent implements OnInit {
       containerRect.left + this.stage!.getPointerPosition()!.x + 20 + 'px';
   }
 
+  private async beginGame() {
+  }
+
   async ngOnInit(): Promise<void> {
     // TODO: handle join existing game
     this.route.queryParams.subscribe(async (params) => {
@@ -309,6 +313,12 @@ export class GameComponent implements OnInit {
         console.error(`failed game setup: ${err}`);
         await this.router.navigate(['home']);
         return;
+      }
+
+      try {
+        await this.beginGame();
+      } catch (err) {
+        console.error(`failed beginning game: ${err}`);
       }
     });
   }

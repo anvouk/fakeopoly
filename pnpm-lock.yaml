@@ -44,18 +44,21 @@ importers:
       material-icons:
         specifier: ^1.13.12
         version: 1.13.12
+      nanoid:
+        specifier: ^5.1.5
+        version: 5.1.5
       pouchdb-browser:
         specifier: ^9.0.0
         version: 9.0.0
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+      sweetalert2:
+        specifier: ^11.17.1
+        version: 11.17.1
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
-      uuid:
-        specifier: ^11.0.3
-        version: 11.0.3
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ^19.0.4
@@ -3044,6 +3047,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@5.1.5:
+    resolution: {integrity: sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
   needle@3.3.1:
     resolution: {integrity: sha512-6k0YULvhpw+RoLNiQCRKOl09Rv1dPLr8hHnVjHqdolKwDrdNyk+Hmrthi4lIGPPz3r39dLx0hsF5s40sZ3Us4Q==}
     engines: {node: '>= 4.4.x'}
@@ -3727,6 +3735,9 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  sweetalert2@11.17.1:
+    resolution: {integrity: sha512-I+Fv0A0eZwVmw11TbT1hhMvxZPUi1+2Yn3+xlYCr136h7VniJywCHjZo3COAhcBi4VuvcWxW4n7uNWwMnCvPRg==}
+
   symbol-observable@4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
     engines: {node: '>=0.10'}
@@ -3868,10 +3879,6 @@ packages:
   utils-merge@1.0.1:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
-
-  uuid@11.0.3:
-    resolution: {integrity: sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==}
-    hasBin: true
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
@@ -7193,6 +7200,8 @@ snapshots:
 
   nanoid@3.3.8: {}
 
+  nanoid@5.1.5: {}
+
   needle@3.3.1:
     dependencies:
       iconv-lite: 0.6.3
@@ -7948,6 +7957,8 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  sweetalert2@11.17.1: {}
+
   symbol-observable@4.0.0: {}
 
   tapable@2.2.1: {}
@@ -8069,8 +8080,6 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   utils-merge@1.0.1: {}
-
-  uuid@11.0.3: {}
 
   uuid@8.3.2: {}
 

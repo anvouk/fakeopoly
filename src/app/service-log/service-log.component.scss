@@ -1,0 +1,26 @@
+.root {
+  width: 18vw;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10000;
+  overflow-y: scroll;
+  max-height: 100vh;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.log-entry-container {
+  padding-bottom: 0.5rem;
+}
+
+.log-entry-text {
+  min-height: 3vh;
+  font-size: 1rem;
+  padding: 0.4rem;
+  align-content: center;
+}
+
+.card-interaction {
+  background-color: rgba(162, 123, 31, 0.4);
+}

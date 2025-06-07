@@ -1,6 +1,7 @@
 import gameService, { Game } from "./game.service";
 import { Player } from "../game/fakeopoly/player";
 import { BoardTile } from "../game/fakeopoly/board-tile";
+import Swal from 'sweetalert2';
 
 /**
  * Handles high level browser game state.
@@ -38,6 +39,15 @@ export class GameStateService {
     return this._tiles.get(Math.abs(id) % this._tiles.size)!;
   }
 
+  public async advanceTurn() {
+    await Swal.fire({
+      title: "Your Turn",
+      timer: 1500,
+      timerProgressBar: true,
+      theme: 'borderless',
+    });
+  }
+
   // TODO: convert in turn lock
   private _doneMoving: boolean = true;
 
@@ -60,7 +70,7 @@ export class GameStateService {
 
       setTimeout(async () => {
         move(self, player, movesRemaining, doneMoving);
-      }, 100);
+      }, 60);
     }
 
     this._doneMoving = false;
