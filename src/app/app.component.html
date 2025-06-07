@@ -1,2 +1,53 @@
-<router-outlet></router-outlet>
-<app-service-log></app-service-log>
+<mat-sidenav-container hasBackdrop="false">
+  <mat-sidenav class="mat-elevation-z8" mode="over">
+    <mat-nav-list>
+      <button style="margin-bottom: 1rem" mat-icon-button matTooltip="Close menu" (click)="closeSideNav()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <mat-list-item>
+        <a class="menu-icons">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </a>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        <a class="menu-icons" matTooltip="Rage quit and spectate game">
+          <mat-icon>logout</mat-icon>
+          <span>Give up</span>
+        </a>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        <a class="menu-icons" matTooltip="How to play">
+          <mat-icon>help</mat-icon>
+          <span>Help</span>
+        </a>
+      </mat-list-item>
+
+      <mat-list-item>
+        <a class="menu-icons" matTooltip="Change settings">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- this is to fix the annying ui glitch where the button remains pressed after closing the menu... -->
+    @if (isSideNavClosed()) {
+      <button class="open-side-menu" mat-icon-button matTooltip="Open menu" (click)="openSideNav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    }
+    @if (isInGame()) {
+      <app-hud></app-hud>
+    }
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

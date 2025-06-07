@@ -1,0 +1,27 @@
+mat-sidenav {
+  min-width: 12rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+mat-nav-list {
+  position: fixed;
+  min-width: 12rem;
+}
+
+.open-side-menu {
+  position: fixed;
+  z-index: 100;
+}
+
+mat-divider {
+  margin: 1rem 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.menu-icons {
+  display: flex;
+  mat-icon {
+    margin-right: 0.6rem;
+  }
+}
