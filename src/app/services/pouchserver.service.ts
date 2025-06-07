@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb-browser';
 import { GameCreationOptions, Game, DiceRoll } from "./game.service";
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 
 /**
  * Dev fake backed/db.
@@ -11,7 +11,7 @@ export class PouchserverService {
 
   public async createNewGame(options: GameCreationOptions): Promise<Game> {
     const game: Game = {
-      _id: uuidv4(),
+      _id: nanoid(),
       name: options.name,
       minPlayers: options.minPlayers || 2,
       maxPlayers: options.maxPlayers || 8,
