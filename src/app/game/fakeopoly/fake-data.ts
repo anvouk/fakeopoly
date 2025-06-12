@@ -1,7 +1,16 @@
+export interface TileGroup {
+  name: string;
+  color?: string;
+}
+
 export interface BaseTileInfo {
   id: number;
   name: string;
   leftClickable: boolean;
+}
+
+export interface OwnableTileInfo {
+  group?: TileGroup;
 }
 
 export enum TileType {
@@ -10,11 +19,9 @@ export enum TileType {
   Corner = 'Corner',
 }
 
-export interface TileRegularInfo extends BaseTileInfo {
+export interface TileRegularInfo extends BaseTileInfo, OwnableTileInfo {
   type: TileType.Regular;
   regularData: {
-    // color also indicates the group
-    color: string;
     houseCost: number;
     hotelCost: number;
     mortgageCost: number;
@@ -39,7 +46,7 @@ export interface TileSpecialInfo extends BaseTileInfo {
   };
 }
 
-export interface TileStationInfo extends TileSpecialInfo {
+export interface TileStationInfo extends TileSpecialInfo, OwnableTileInfo {
   specialType: SpecialType.Station;
   stationData: {
     mortgageCost: number;
@@ -47,7 +54,7 @@ export interface TileStationInfo extends TileSpecialInfo {
   };
 }
 
-export interface TileCompanyInfo extends TileSpecialInfo {
+export interface TileCompanyInfo extends TileSpecialInfo, OwnableTileInfo {
   specialType: SpecialType.Company;
   companyData: {
     mortgageCost: number;
@@ -86,6 +93,47 @@ export type TileInfo =
   | TileTaxInfo
   | TileCornerInfo;
 
+export const fakeTileGroups: TileGroup[] = [
+  {
+    name: 'First group',
+    color: '#603d2e',
+  },
+  {
+    name: 'Second group',
+    color: '#d6e6f4',
+  },
+  {
+    name: 'Third group',
+    color: '#db2f88',
+  },
+  {
+    name: 'Fourth group',
+    color: '#f09100',
+  },
+  {
+    name: 'Fifth group',
+    color: '#e8001e',
+  },
+  {
+    name: 'Sixth group',
+    color: '#fde002',
+  },
+  {
+    name: 'Seventh group',
+    color: '#00b94a',
+  },
+  {
+    name: 'Eighth group',
+    color: '#006cc6',
+  },
+  {
+    name: 'Stations group',
+  },
+  {
+    name: 'Societies group',
+  },
+];
+
 export const fakeTiles: TileInfo[] = [
   {
     id: 0,
@@ -100,9 +148,9 @@ export const fakeTiles: TileInfo[] = [
     id: 1,
     name: 'Corso Vercelli',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'First group'),
     type: TileType.Regular,
     regularData: {
-      color: '#603d2e',
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 30,
@@ -125,9 +173,9 @@ export const fakeTiles: TileInfo[] = [
     id: 3,
     name: 'Corso Venezia',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'First group'),
     type: TileType.Regular,
     regularData: {
-      color: '#603d2e',
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 30,
@@ -153,6 +201,7 @@ export const fakeTiles: TileInfo[] = [
     id: 5,
     name: 'Stazione Lingotto',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -169,9 +218,9 @@ export const fakeTiles: TileInfo[] = [
     id: 6,
     name: 'Corso Luigi Settembrini',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Second group'),
     type: TileType.Regular,
     regularData: {
-      color: '#d6e6f4',
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 50,
@@ -194,9 +243,9 @@ export const fakeTiles: TileInfo[] = [
     id: 8,
     name: 'Corso Orbassano',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Second group'),
     type: TileType.Regular,
     regularData: {
-      color: '#d6e6f4',
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 50,
@@ -207,9 +256,9 @@ export const fakeTiles: TileInfo[] = [
     id: 9,
     name: 'Corso Cosenza',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Second group'),
     type: TileType.Regular,
     regularData: {
-      color: '#d6e6f4',
       houseCost: 50,
       hotelCost: 50,
       mortgageCost: 60,
@@ -229,9 +278,9 @@ export const fakeTiles: TileInfo[] = [
     id: 11,
     name: 'Via Zino Zini',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Third group'),
     type: TileType.Regular,
     regularData: {
-      color: '#db2f88',
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 70,
@@ -242,6 +291,7 @@ export const fakeTiles: TileInfo[] = [
     id: 12,
     name: "Societa' Elettrica",
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Societies group'),
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
@@ -258,9 +308,9 @@ export const fakeTiles: TileInfo[] = [
     id: 13,
     name: 'Via Nizza',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Third group'),
     type: TileType.Regular,
     regularData: {
-      color: '#db2f88',
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 70,
@@ -271,9 +321,9 @@ export const fakeTiles: TileInfo[] = [
     id: 14,
     name: 'Corso Moncalieri',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Third group'),
     type: TileType.Regular,
     regularData: {
-      color: '#db2f88',
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 80,
@@ -284,6 +334,7 @@ export const fakeTiles: TileInfo[] = [
     id: 15,
     name: 'Stazione Sito',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -300,9 +351,9 @@ export const fakeTiles: TileInfo[] = [
     id: 16,
     name: 'Corso Grosseto',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Fourth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#f09100',
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 90,
@@ -325,9 +376,9 @@ export const fakeTiles: TileInfo[] = [
     id: 18,
     name: 'Corso Potenza',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Fourth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#f09100',
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 90,
@@ -338,9 +389,9 @@ export const fakeTiles: TileInfo[] = [
     id: 19,
     name: 'Piazza Giuseppe Manno',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Fourth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#f09100',
       houseCost: 100,
       hotelCost: 100,
       mortgageCost: 100,
@@ -360,9 +411,9 @@ export const fakeTiles: TileInfo[] = [
     id: 21,
     name: 'Via Cernaia',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Fifth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#e8001e',
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 110,
@@ -385,9 +436,9 @@ export const fakeTiles: TileInfo[] = [
     id: 23,
     name: 'Corso Galileo Ferraris',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Fifth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#e8001e',
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 110,
@@ -398,9 +449,9 @@ export const fakeTiles: TileInfo[] = [
     id: 24,
     name: 'Corso Vittorio Emanuele II',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Fifth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#e8001e',
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 120,
@@ -411,6 +462,7 @@ export const fakeTiles: TileInfo[] = [
     id: 25,
     name: 'Stazione Porta Nuova',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -427,9 +479,9 @@ export const fakeTiles: TileInfo[] = [
     id: 26,
     name: 'Corso Stati Uniti',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Sixth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#fde002',
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 130,
@@ -440,9 +492,9 @@ export const fakeTiles: TileInfo[] = [
     id: 27,
     name: 'Corso Traiano',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Sixth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#fde002',
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 130,
@@ -453,6 +505,7 @@ export const fakeTiles: TileInfo[] = [
     id: 28,
     name: "Societa' Acqua Potabile",
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Societies group'),
     type: TileType.Special,
     specialType: SpecialType.Company,
     specialData: {
@@ -469,9 +522,9 @@ export const fakeTiles: TileInfo[] = [
     id: 29,
     name: 'Piazza Castello',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Sixth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#fde002',
       houseCost: 150,
       hotelCost: 150,
       mortgageCost: 140,
@@ -491,9 +544,9 @@ export const fakeTiles: TileInfo[] = [
     id: 31,
     name: 'Via Roma',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Seventh group'),
     type: TileType.Regular,
     regularData: {
-      color: '#00b94a',
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 150,
@@ -504,9 +557,9 @@ export const fakeTiles: TileInfo[] = [
     id: 32,
     name: 'Corso Siracusa',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Seventh group'),
     type: TileType.Regular,
     regularData: {
-      color: '#00b94a',
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 150,
@@ -529,9 +582,9 @@ export const fakeTiles: TileInfo[] = [
     id: 34,
     name: 'Via Guido Reni',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Seventh group'),
     type: TileType.Regular,
     regularData: {
-      color: '#00b94a',
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 160,
@@ -542,6 +595,7 @@ export const fakeTiles: TileInfo[] = [
     id: 35,
     name: 'Stazione Porta Susa',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
     specialData: {
@@ -570,9 +624,9 @@ export const fakeTiles: TileInfo[] = [
     id: 37,
     name: 'Corso Principe Oddone',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Eighth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#006cc6',
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 175,
@@ -598,9 +652,9 @@ export const fakeTiles: TileInfo[] = [
     id: 39,
     name: 'Parco San Vito',
     leftClickable: true,
+    group: fakeTileGroups.find((x) => x.name === 'Eighth group'),
     type: TileType.Regular,
     regularData: {
-      color: '#006cc6',
       houseCost: 200,
       hotelCost: 200,
       mortgageCost: 200,

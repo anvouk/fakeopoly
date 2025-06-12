@@ -26,7 +26,7 @@ export class BoardTile {
     const banner = new Konva.Rect({
       width: BoardTile.WIDTH,
       height: 30,
-      fill: tileInfo.regularData.color,
+      fill: tileInfo.group?.color,
       stroke: 'black',
       strokeWidth: 2,
     });
