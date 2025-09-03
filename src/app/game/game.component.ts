@@ -243,20 +243,28 @@ export class GameComponent implements OnInit {
       document.getElementById('context-menu')!.style.display = 'none';
     });
 
-    document.getElementById('move-here')!.addEventListener('click', () => {
+    document.getElementById('teleport-here')!.addEventListener('click', () => {
       if (this.selectedBoardTile == null) {
         return;
       }
 
-      this.player!.moveToTile(this.selectedBoardTile);
+      this.player!.teleportToTile(this.selectedBoardTile);
     });
 
-    document.getElementById('move-prev')!.addEventListener('click', () => {
+    document.getElementById('move-forward-here')!.addEventListener('click', () => {
       if (this.selectedBoardTile == null) {
         return;
       }
 
-      this.player!.moveToNextTile();
+      this.player!.moveForwardToTile(this.selectedBoardTile);
+    });
+
+    document.getElementById('move-backward-here')!.addEventListener('click', () => {
+      if (this.selectedBoardTile == null) {
+        return;
+      }
+
+      this.player!.moveBackwardToTile(this.selectedBoardTile);
     });
 
     document.getElementById('move-next')!.addEventListener('click', () => {
@@ -264,7 +272,15 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      this.player!.moveToPrevTile();
+      this.player!.moveForwardTimes(1);
+    });
+
+    document.getElementById('move-prev')!.addEventListener('click', () => {
+      if (this.selectedBoardTile == null) {
+        return;
+      }
+
+      this.player!.moveBackwardTimes(1);
     });
 
     document.getElementById('handle-turn')!.addEventListener('click', async () => {
@@ -272,10 +288,9 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      await gameStateService.turnLoop(async () => {
-        console.log(`player endend on tile: ${JSON.stringify(this.player!.tile.tileInfo)}`);
-        await gameStateService.advanceTurn();
-      });
+      await gameStateService.turnLoop();
+      console.log(`player endend on tile: ${JSON.stringify(this.player!.tile.tileInfo)}`);
+      await gameStateService.advanceTurn();
     });
   }
 
