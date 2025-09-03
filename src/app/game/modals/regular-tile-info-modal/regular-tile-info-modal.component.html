@@ -19,7 +19,7 @@
       <mat-label>Hotel cost</mat-label>
       <input matInput readonly [(ngModel)]="tileInfo.regularData.hotelCost">
     </mat-form-field>
-    <mat-table [dataSource]="housesRent">
+    <mat-table [dataSource]="this.housesRent()">
       <!-- Column Declarations -->
       <ng-container matColumnDef="buy-house">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -27,12 +27,12 @@
           @if (i === 0) {
             <!-- No house -->
           } @else if (row.buyHouse) {
-            <button mat-button mat-raised-button color="primary" (click)="sellHouse()">
-              <mat-icon class="material-symbols-outlined">close</mat-icon> Sell
+            <button mat-button mat-raised-button color="accent" [disabled]="!row.canBuy" (click)="buyHouse(i)">
+              <mat-icon class="material-symbols-outlined">add</mat-icon> Buy
             </button>
           } @else {
-            <button mat-button mat-raised-button color="accent" (click)="buyHouse()">
-              <mat-icon class="material-symbols-outlined">add</mat-icon> Buy
+            <button mat-button mat-raised-button color="primary" [disabled]="!row.canSell" (click)="sellHouse(i)">
+              <mat-icon class="material-symbols-outlined">close</mat-icon> Sell
             </button>
           }
         </mat-cell>

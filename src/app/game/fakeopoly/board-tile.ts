@@ -11,8 +11,14 @@ export class BoardTile {
   public static readonly CORNER_WIDTH: number = 160;
   public static readonly CORNER_HEIGHT: number = 160;
 
+  public static readonly HOUSE_WIDTH: number = 20;
+  public static readonly HOUSE_HEIGHT: number = 20;
+
   private readonly _root: Konva.Group;
   private readonly _tileInfo: TileInfo;
+
+  private _houses: number = 0;
+  private _housesImages: Konva.Image[] = [];
 
   public get root(): Konva.Group {
     return this._root;
@@ -20,6 +26,28 @@ export class BoardTile {
 
   public get tileInfo(): TileInfo {
     return this._tileInfo;
+  }
+
+  public get houses() {
+    return this._houses;
+  }
+
+  public get maxHouses() {
+    return this._housesImages.length;
+  }
+
+  public set houses(value: number) {
+    if (value < 0 || value > this.maxHouses) {
+      return;
+    }
+    for (let i = 0; i < this.maxHouses; i++) {
+      if (value <= i) {
+        this._housesImages[i].hide();
+      } else {
+        this._housesImages[i].show();
+      }
+    }
+    this._houses = value;
   }
 
   private constructRegularTile(tileInfo: TileRegularInfo) {
@@ -31,6 +59,22 @@ export class BoardTile {
       strokeWidth: 2,
     });
     this._root.add(banner);
+
+    for (let i = 0; i < tileInfo.regularData.rents.length - 1; i++) {
+      const img = new Image(BoardTile.HOUSE_WIDTH, BoardTile.HOUSE_HEIGHT);
+      img.src = tileInfo.regularData.houseImageUrl;
+
+      const house = new Konva.Image({
+        x: i * 4 * (BoardTile.WIDTH / BoardTile.HOUSE_WIDTH),
+        y: 5,
+        width: BoardTile.HOUSE_WIDTH,
+        height: BoardTile.HOUSE_HEIGHT,
+        image: img,
+      });
+      house.hide();
+      this._housesImages.push(house)
+      this._root.add(house);
+    }
 
     const text = new Konva.Text({
       text: tileInfo.name.replaceAll(' ', '\n'),

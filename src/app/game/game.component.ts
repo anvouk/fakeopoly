@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Konva from 'konva';
 import { BoardTile, OnTileLeftClick, OnTileRightClick } from './fakeopoly/board-tile';
-import { fakePlayerPins, fakeTiles, SpecialType, TileType } from './fakeopoly/fake-data';
-import { Player } from './fakeopoly/player';
-import { PlayerPin } from './fakeopoly/player-pin';
+import { fakeTiles, SpecialType, TileType } from './fakeopoly/fake-data';
 import gameService from '../services/game.service';
 import gameStateService from '../services/game-state.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,14 +23,13 @@ export class GameComponent implements OnInit {
   private static readonly HEIGHT = 1220;
 
   private stage: Konva.Stage | null = null;
-  private player: Player | null = null;
 
   private readonly onTileLeftClick: OnTileLeftClick = (tile) => {
     console.log('on left click on tile:', tile.tileInfo.name);
     switch (tile.tileInfo.type) {
       case TileType.Regular:
         this.dialog.open(RegularTileInfoModalComponent, {
-          data: tile.tileInfo,
+          data: tile,
         });
         break;
       case TileType.Special:
@@ -223,18 +220,10 @@ export class GameComponent implements OnInit {
 
     console.log('end map draw');
 
-    // player setup
-    this.player = new Player(
-      { nickname: 'test', isHost: true },
-      new PlayerPin(fakePlayerPins[0]),
-      cornerBottomLeft,
-      gameStateService,
-    );
+    gameStateService.setup(game, cornerBottomLeft, tiles);
 
     this.stage.add(layer);
     layer.draw();
-
-    gameStateService.setup(game, this.player, tiles);
   }
 
   private setupContextMenu() {
@@ -248,7 +237,7 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      this.player!.teleportToTile(this.selectedBoardTile);
+      gameStateService.player.teleportToTile(this.selectedBoardTile);
     });
 
     document.getElementById('move-forward-here')!.addEventListener('click', () => {
@@ -256,7 +245,7 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      this.player!.moveForwardToTile(this.selectedBoardTile);
+      gameStateService.player.moveForwardToTile(this.selectedBoardTile);
     });
 
     document.getElementById('move-backward-here')!.addEventListener('click', () => {
@@ -264,7 +253,7 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      this.player!.moveBackwardToTile(this.selectedBoardTile);
+      gameStateService.player.moveBackwardToTile(this.selectedBoardTile);
     });
 
     document.getElementById('move-next')!.addEventListener('click', () => {
@@ -272,7 +261,7 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      this.player!.moveForwardTimes(1);
+      gameStateService.player.moveForwardTimes(1);
     });
 
     document.getElementById('move-prev')!.addEventListener('click', () => {
@@ -280,7 +269,23 @@ export class GameComponent implements OnInit {
         return;
       }
 
-      this.player!.moveBackwardTimes(1);
+      gameStateService.player.moveBackwardTimes(1);
+    });
+
+    document.getElementById('add-house')!.addEventListener('click', () => {
+      if (this.selectedBoardTile == null) {
+        return;
+      }
+
+      this.selectedBoardTile.houses += 1;
+    });
+
+    document.getElementById('remove-house')!.addEventListener('click', () => {
+      if (this.selectedBoardTile == null) {
+        return;
+      }
+
+      this.selectedBoardTile.houses -= 1;
     });
 
     document.getElementById('handle-turn')!.addEventListener('click', async () => {
@@ -289,7 +294,7 @@ export class GameComponent implements OnInit {
       }
 
       await gameStateService.turnLoop();
-      console.log(`player endend on tile: ${JSON.stringify(this.player!.tile.tileInfo)}`);
+      console.log(`player endend on tile: ${JSON.stringify(gameStateService.player.tile.tileInfo)}`);
       await gameStateService.advanceTurn();
     });
   }

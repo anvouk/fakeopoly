@@ -24,7 +24,9 @@ export interface TileRegularInfo extends BaseTileInfo, OwnableTileInfo {
   type: TileType.Regular;
   regularData: {
     houseCost: number;
+    houseImageUrl: string;
     hotelCost: number;
+    hotelImageUrl: string;
     mortgageCost: number;
     rents: number[];
   };
@@ -154,7 +156,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 50,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 50,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 30,
       rents: [2, 10, 30, 90, 160, 250],
     },
@@ -180,7 +184,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 50,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 50,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 30,
       rents: [4, 20, 60, 180, 320, 450],
     },
@@ -227,7 +233,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 50,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 50,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 50,
       rents: [6, 30, 90, 270, 400, 550],
     },
@@ -253,7 +261,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 50,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 50,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 50,
       rents: [6, 30, 90, 270, 400, 550],
     },
@@ -267,7 +277,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 50,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 50,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 60,
       rents: [8, 40, 100, 300, 450, 600],
     },
@@ -290,7 +302,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 100,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 100,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 70,
       rents: [10, 50, 150, 450, 625, 750],
     },
@@ -322,7 +336,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 100,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 100,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 70,
       rents: [10, 50, 150, 450, 625, 750],
     },
@@ -336,7 +352,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 100,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 100,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 80,
       rents: [12, 60, 180, 500, 700, 900],
     },
@@ -368,7 +386,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 100,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 100,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 90,
       rents: [14, 70, 200, 550, 750, 950],
     },
@@ -394,7 +414,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 100,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 100,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 90,
       rents: [14, 70, 200, 550, 750, 950],
     },
@@ -408,7 +430,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 100,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 100,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 100,
       rents: [16, 80, 220, 600, 800, 1000],
     },
@@ -431,7 +455,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 150,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 150,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 110,
       rents: [18, 90, 250, 700, 875, 1050],
     },
@@ -457,7 +483,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 150,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 150,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 110,
       rents: [18, 90, 250, 700, 875, 1050],
     },
@@ -471,7 +499,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 150,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 150,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 120,
       rents: [20, 100, 300, 750, 925, 1100],
     },
@@ -503,7 +533,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 150,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 150,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 130,
       rents: [22, 110, 330, 800, 975, 1150],
     },
@@ -517,7 +549,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 150,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 150,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 130,
       rents: [22, 110, 330, 800, 975, 1150],
     },
@@ -549,7 +583,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 150,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 150,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 140,
       rents: [24, 120, 360, 850, 1025, 1200],
     },
@@ -572,7 +608,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 200,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 200,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 150,
       rents: [26, 130, 390, 900, 1100, 1275],
     },
@@ -586,7 +624,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 200,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 200,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 150,
       rents: [26, 130, 390, 900, 1100, 1275],
     },
@@ -612,7 +652,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 200,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 200,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 160,
       rents: [28, 150, 450, 1000, 1200, 1400],
     },
@@ -656,7 +698,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 200,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 200,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 175,
       rents: [35, 175, 500, 1100, 1300, 1500],
     },
@@ -685,7 +729,9 @@ export const fakeTiles: TileInfo[] = [
     type: TileType.Regular,
     regularData: {
       houseCost: 200,
+      houseImageUrl: 'http://localhost:4200/assets/house.png',
       hotelCost: 200,
+      hotelImageUrl: 'http://localhost:4200/assets/house.png',
       mortgageCost: 200,
       rents: [50, 200, 600, 1400, 1700, 2000],
     },
@@ -699,7 +745,7 @@ export interface PlayerPinInfo {
 
 export const fakePlayerPins: PlayerPinInfo[] = [
   {
-    name: 'demo',
+    name: 'mole',
     imageUrl: 'http://localhost:4200/assets/player-1.png',
   },
 ];

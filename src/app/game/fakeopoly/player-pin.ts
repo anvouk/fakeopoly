@@ -12,10 +12,16 @@ export class PlayerPin {
     return this._root;
   }
 
+  // a best effort attempt to mitigate players overlapping on the board.
+  private randomOffset() {
+    const sign = Math.random() > 0.5 ? 1 : -1;
+    return Math.random() * 30 * sign;
+  }
+
   public constructor(pinInfo: PlayerPinInfo) {
     this._root = new Konva.Group({
-      x: BoardTile.WIDTH / 2 - PlayerPin.WIDTH / 2,
-      y: BoardTile.HEIGHT / 2 - PlayerPin.HEIGHT / 2,
+      x: BoardTile.WIDTH / 2 - PlayerPin.WIDTH / 2 + this.randomOffset(),
+      y: BoardTile.HEIGHT / 2 - PlayerPin.HEIGHT / 2 + this.randomOffset(),
       width: PlayerPin.WIDTH,
       height: PlayerPin.HEIGHT,
     });

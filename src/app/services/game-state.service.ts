@@ -2,7 +2,8 @@ import gameService, { Game } from "./game.service";
 import { Player } from "../game/fakeopoly/player";
 import { BoardTile } from "../game/fakeopoly/board-tile";
 import Swal from 'sweetalert2';
-import { TileType } from '../game/fakeopoly/fake-data';
+import { fakePlayerPins, TileType } from '../game/fakeopoly/fake-data';
+import { PlayerPin } from '../game/fakeopoly/player-pin';
 
 export type OnPlayerOnTile = (player: Player, arrivesFrom: BoardTile | null, arrivesTo: BoardTile) => void;
 export type OnPlayerGoesPastTile = (player: Player, arrivesFrom: BoardTile | null, passesTile: BoardTile, nextTile: BoardTile) => void;
@@ -12,12 +13,7 @@ export type OnPlayerGoesPastTile = (player: Player, arrivesFrom: BoardTile | nul
  * This binds backend low level logic + browser high level visuals.
  */
 export class GameStateService {
-  // @ts-ignore
-  private _currentGame: Game;
-  // @ts-ignore
-  private _currentPlayer: Player;
   private _tiles: Map<number, BoardTile> = new Map<number, BoardTile>();
-
   private _turn: number = 1;
 
   /**
@@ -30,6 +26,12 @@ export class GameStateService {
    * or next tile. This callback is not invoked on teleport.
    */
   public readonly onPlayerGoesPastTile: OnPlayerGoesPastTile;
+
+  private _players: Player[] = [];
+  // @ts-ignore
+  private _currentPlayer: Player;
+  // @ts-ignore
+  private _currentGame: Game;
 
   public constructor() {
     this.onPlayerOnTile = (player, arrivesFrom, arrivesTo) => {
@@ -55,9 +57,12 @@ export class GameStateService {
     };
   }
 
-  public setup(game: Game, currentPlayer: Player, tiles: BoardTile[]) {
+  public setup(game: Game, playersStartingTile: BoardTile, tiles: BoardTile[]) {
+    this._players = game.playersInfo.map(p => new Player(p, new PlayerPin(fakePlayerPins[0]), playersStartingTile, this));
+    this._players.push(new Player({ nickname: 'test-player-2', isHost: false }, new PlayerPin(fakePlayerPins[0]), playersStartingTile, this));
+    this._currentPlayer = this._players[0];
+
     this._currentGame = game;
-    this._currentPlayer = currentPlayer;
     tiles.forEach(t => this._tiles.set(t.tileInfo.id, t));
   }
 
@@ -115,7 +120,6 @@ export class GameStateService {
       await this.player.moveForwardTimes(moveNum);
     } finally {
       this._doneMoving = true;
-      console.log('DONE!!!');
     }
   }
 }

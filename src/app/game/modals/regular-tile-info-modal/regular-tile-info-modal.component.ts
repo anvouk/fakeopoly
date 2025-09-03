@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import {
@@ -19,10 +19,14 @@ import {
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
+import { BoardTile } from '../../fakeopoly/board-tile';
 import { TileRegularInfo } from '../../fakeopoly/fake-data';
+import { GameLogService } from '../../../services/game-log.service';
 
 interface HousesRent {
   buyHouse: boolean;
+  canBuy: boolean;
+  canSell: boolean;
   houseCost: number;
   rent: number;
 }
@@ -54,29 +58,68 @@ interface HousesRent {
   styleUrl: './regular-tile-info-modal.component.scss',
 })
 export class RegularTileInfoModalComponent {
-  readonly housesRent: HousesRent[] = [];
+  readonly housesRent: WritableSignal<HousesRent[]> = signal([]);
+
+  readonly tileInfo: TileRegularInfo;
 
   constructor(
     public dialogRef: MatDialogRef<RegularTileInfoModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public tileInfo: TileRegularInfo,
+    private readonly gameLogService: GameLogService,
+    @Inject(MAT_DIALOG_DATA) public tile: BoardTile,
   ) {
-    for (let i = 0; i < this.tileInfo.regularData.rents.length; i++) {
-      this.housesRent.push({
+    this.tileInfo = tile.tileInfo as TileRegularInfo;
+
+    // first entry is for tile rent with no houses.
+    this.housesRent.update(array => {
+      return [...array, {
         buyHouse: false,
-        rent: this.tileInfo.regularData.rents[i],
-        // every fifth house is a hotel
-        houseCost: i % 5 === 0 ? this.tileInfo.regularData.hotelCost : this.tileInfo.regularData.houseCost,
+        canBuy: false,
+        canSell: false,
+        rent: this.tileInfo.regularData.rents[0],
+        houseCost: 0,
+      }];
+    });
+    for (let i = 1; i < this.tileInfo.regularData.rents.length; i++) {
+      this.housesRent.update(array => {
+        return [...array, {
+          buyHouse: this.tile.houses < i,
+          canBuy: this.tile.houses >= i - 1,
+          canSell: this.tile.houses <= i,
+          rent: this.tileInfo.regularData.rents[i],
+          // every fifth house is a hotel
+          houseCost: i % 5 === 0 ? this.tileInfo.regularData.hotelCost : this.tileInfo.regularData.houseCost,
+        }];
       });
     }
-    this.housesRent[1].buyHouse = true;
   }
 
-  async buyHouse(): Promise<void> {
-    console.log('buying house');
+  private async updateList(index: number) {
+    this.housesRent.update(array => {
+      for (let i = 1; i < array.length; i++){
+        array[i].canBuy = this.tile.houses >= i - 1;
+        array[i].canSell = this.tile.houses <= i;
+      }
+      array[index].buyHouse = this.tile.houses < index;
+      return [...array];
+    });
   }
 
-  async sellHouse(): Promise<void> {
-    console.log('selling house');
+  async buyHouse(index: number): Promise<void> {
+    this.tile.houses += 1;
+    await this.updateList(index);
+    this.gameLogService.postNotice({
+      msg: `You bought a house on ${this.tileInfo.name}`,
+      expirySecs: 3,
+    });
+  }
+
+  async sellHouse(index: number): Promise<void> {
+    this.tile.houses -= 1;
+    await this.updateList(index);
+    this.gameLogService.postNotice({
+      msg: `You sold an house on ${this.tileInfo.name}`,
+      expirySecs: 3,
+    });
   }
 
   async close(): Promise<void> {
