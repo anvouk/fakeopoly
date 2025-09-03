@@ -10,6 +10,7 @@ export interface BaseTileInfo {
 }
 
 export interface OwnableTileInfo {
+  buyCost: number;
   group?: TileGroup;
 }
 
@@ -148,6 +149,7 @@ export const fakeTiles: TileInfo[] = [
     id: 1,
     name: 'Corso Vercelli',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'First group'),
     type: TileType.Regular,
     regularData: {
@@ -173,6 +175,7 @@ export const fakeTiles: TileInfo[] = [
     id: 3,
     name: 'Corso Venezia',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'First group'),
     type: TileType.Regular,
     regularData: {
@@ -201,6 +204,7 @@ export const fakeTiles: TileInfo[] = [
     id: 5,
     name: 'Stazione Lingotto',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
@@ -218,6 +222,7 @@ export const fakeTiles: TileInfo[] = [
     id: 6,
     name: 'Corso Luigi Settembrini',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Second group'),
     type: TileType.Regular,
     regularData: {
@@ -243,6 +248,7 @@ export const fakeTiles: TileInfo[] = [
     id: 8,
     name: 'Corso Orbassano',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Second group'),
     type: TileType.Regular,
     regularData: {
@@ -256,6 +262,7 @@ export const fakeTiles: TileInfo[] = [
     id: 9,
     name: 'Corso Cosenza',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Second group'),
     type: TileType.Regular,
     regularData: {
@@ -278,6 +285,7 @@ export const fakeTiles: TileInfo[] = [
     id: 11,
     name: 'Via Zino Zini',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Third group'),
     type: TileType.Regular,
     regularData: {
@@ -291,6 +299,7 @@ export const fakeTiles: TileInfo[] = [
     id: 12,
     name: "Societa' Elettrica",
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Societies group'),
     type: TileType.Special,
     specialType: SpecialType.Company,
@@ -308,6 +317,7 @@ export const fakeTiles: TileInfo[] = [
     id: 13,
     name: 'Via Nizza',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Third group'),
     type: TileType.Regular,
     regularData: {
@@ -321,6 +331,7 @@ export const fakeTiles: TileInfo[] = [
     id: 14,
     name: 'Corso Moncalieri',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Third group'),
     type: TileType.Regular,
     regularData: {
@@ -334,6 +345,7 @@ export const fakeTiles: TileInfo[] = [
     id: 15,
     name: 'Stazione Sito',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
@@ -351,6 +363,7 @@ export const fakeTiles: TileInfo[] = [
     id: 16,
     name: 'Corso Grosseto',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Fourth group'),
     type: TileType.Regular,
     regularData: {
@@ -376,6 +389,7 @@ export const fakeTiles: TileInfo[] = [
     id: 18,
     name: 'Corso Potenza',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Fourth group'),
     type: TileType.Regular,
     regularData: {
@@ -389,6 +403,7 @@ export const fakeTiles: TileInfo[] = [
     id: 19,
     name: 'Piazza Giuseppe Manno',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Fourth group'),
     type: TileType.Regular,
     regularData: {
@@ -411,6 +426,7 @@ export const fakeTiles: TileInfo[] = [
     id: 21,
     name: 'Via Cernaia',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Fifth group'),
     type: TileType.Regular,
     regularData: {
@@ -436,6 +452,7 @@ export const fakeTiles: TileInfo[] = [
     id: 23,
     name: 'Corso Galileo Ferraris',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Fifth group'),
     type: TileType.Regular,
     regularData: {
@@ -449,6 +466,7 @@ export const fakeTiles: TileInfo[] = [
     id: 24,
     name: 'Corso Vittorio Emanuele II',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Fifth group'),
     type: TileType.Regular,
     regularData: {
@@ -462,6 +480,7 @@ export const fakeTiles: TileInfo[] = [
     id: 25,
     name: 'Stazione Porta Nuova',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
@@ -479,6 +498,7 @@ export const fakeTiles: TileInfo[] = [
     id: 26,
     name: 'Corso Stati Uniti',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Sixth group'),
     type: TileType.Regular,
     regularData: {
@@ -492,6 +512,7 @@ export const fakeTiles: TileInfo[] = [
     id: 27,
     name: 'Corso Traiano',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Sixth group'),
     type: TileType.Regular,
     regularData: {
@@ -505,6 +526,7 @@ export const fakeTiles: TileInfo[] = [
     id: 28,
     name: "Societa' Acqua Potabile",
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Societies group'),
     type: TileType.Special,
     specialType: SpecialType.Company,
@@ -522,6 +544,7 @@ export const fakeTiles: TileInfo[] = [
     id: 29,
     name: 'Piazza Castello',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Sixth group'),
     type: TileType.Regular,
     regularData: {
@@ -544,6 +567,7 @@ export const fakeTiles: TileInfo[] = [
     id: 31,
     name: 'Via Roma',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Seventh group'),
     type: TileType.Regular,
     regularData: {
@@ -557,6 +581,7 @@ export const fakeTiles: TileInfo[] = [
     id: 32,
     name: 'Corso Siracusa',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Seventh group'),
     type: TileType.Regular,
     regularData: {
@@ -582,6 +607,7 @@ export const fakeTiles: TileInfo[] = [
     id: 34,
     name: 'Via Guido Reni',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Seventh group'),
     type: TileType.Regular,
     regularData: {
@@ -595,6 +621,7 @@ export const fakeTiles: TileInfo[] = [
     id: 35,
     name: 'Stazione Porta Susa',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Stations group'),
     type: TileType.Special,
     specialType: SpecialType.Station,
@@ -624,6 +651,7 @@ export const fakeTiles: TileInfo[] = [
     id: 37,
     name: 'Corso Principe Oddone',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Eighth group'),
     type: TileType.Regular,
     regularData: {
@@ -652,6 +680,7 @@ export const fakeTiles: TileInfo[] = [
     id: 39,
     name: 'Parco San Vito',
     leftClickable: true,
+    buyCost: 10,
     group: fakeTileGroups.find((x) => x.name === 'Eighth group'),
     type: TileType.Regular,
     regularData: {
