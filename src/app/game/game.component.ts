@@ -11,6 +11,7 @@ import { RegularTileInfoModalComponent } from './modals/regular-tile-info-modal/
 import { StationsTileInfoModalComponent } from './modals/stations-tile-info-modal/stations-tile-info-modal.component';
 import { CompanyTileInfoModalComponent } from './modals/company-tile-info-modal/company-tile-info-modal.component';
 import { GameLogService } from '../services/game-log.service';
+import pouchserverService from '../services/pouchserver.service';
 
 @Component({
   selector: 'app-game',
@@ -333,6 +334,17 @@ export class GameComponent implements OnInit {
       if (joinGameId == null) {
         console.error('missing gameId');
         await this.router.navigate(['home']);
+        return;
+      }
+
+      const game = await pouchserverService.getGame(joinGameId);
+      if (game == null) {
+        console.error(`game does not exist: ${joinGameId}`);
+        await this.router.navigate(['game-not-found'], {
+          queryParams: {
+            id: joinGameId,
+          }
+        });
         return;
       }
 
