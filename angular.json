@@ -66,9 +66,9 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
+              "sweetalert2",
               "vuvuzela",
               "spark-md5",
-              "konva",
               "events"
             ]
           },
